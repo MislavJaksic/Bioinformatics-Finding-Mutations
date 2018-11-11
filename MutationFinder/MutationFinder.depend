@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1541888791 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.cpp
+	"main.h"
+
+1541888652 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
+	<iostream>
+	<fstream>
+	<string>
+
+1541888836 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta_file.cpp
+	"main.h"
+
