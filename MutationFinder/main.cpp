@@ -3,6 +3,7 @@
 int main(void)
 {
     std::cout << "Hello world!" << std::endl;
-    read_fasta_file("ecoli.fasta");
+    std::string file_name = "sample.fasta";
+    ReadFASTAFile(file_name);
     return 0;
 }

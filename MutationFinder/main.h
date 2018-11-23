@@ -4,11 +4,15 @@
 
 //Includes
 #include <iostream>
-#include <fstream>
 #include <string>
+#include <fstream>
+#include <array>
+#include <vector>
+
+#include "read_fasta_file.h"
 
 //Declarations
-void read_fasta_file(std::string file_name);
+void ReadFASTAFile(std::string &file_name);
 
 //Header guard end
 #endif

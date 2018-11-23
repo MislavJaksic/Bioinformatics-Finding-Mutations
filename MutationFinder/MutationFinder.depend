@@ -1,12 +1,19 @@
 # depslib dependency file v1.0
-1541888791 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.cpp
+1543013979 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.cpp
 	"main.h"
 
-1541888652 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
+1543005033 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
 	<iostream>
-	<fstream>
 	<string>
+	<fstream>
+	<array>
+	<vector>
+	"read_fasta_file.h"
 
-1541888836 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta_file.cpp
+1543014485 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta_file.cpp
 	"main.h"
+
+1543014294 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta_file.h
+
+1543004540 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\unit_testing.cpp
 

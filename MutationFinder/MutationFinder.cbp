@@ -36,6 +36,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
 		<Unit filename="read_fasta_file.cpp" />
+		<Unit filename="read_fasta_file.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
