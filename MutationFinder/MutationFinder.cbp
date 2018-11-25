@@ -32,15 +32,34 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="ecoli.fasta" />
+		<Unit filename="ecoli_iai39.fasta" />
+		<Unit filename="ecoli_o157.fasta" />
+		<Unit filename="empty.fasta" />
+		<Unit filename="fasta_wrapper.cpp" />
+		<Unit filename="fasta_wrapper.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
-		<Unit filename="read_fasta_file.cpp" />
-		<Unit filename="read_fasta_file.h" />
+		<Unit filename="map_helper.cpp" />
+		<Unit filename="map_helper.h" />
+		<Unit filename="read_file.cpp" />
+		<Unit filename="read_file.h" />
+		<Unit filename="sample_A.fasta" />
+		<Unit filename="sample_B.fasta" />
+		<Unit filename="standard_include.h" />
+		<Unit filename="stream_helper.cpp" />
+		<Unit filename="stream_helper.h" />
+		<Unit filename="string_helper.cpp" />
+		<Unit filename="string_helper.h" />
+		<Unit filename="type_aliases.h" />
+		<Unit filename="vector_helper.cpp" />
+		<Unit filename="vector_helper.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<debugger />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="" main="" init_handlers="necessary" language="CPP" />
+			</wxsmith>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

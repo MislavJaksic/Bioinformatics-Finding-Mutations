@@ -2,17 +2,10 @@
 #ifndef MAIN
 #define MAIN
 
+//Aliases
+
 //Includes
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <array>
-#include <vector>
-
-#include "read_fasta_file.h"
-
-//Declarations
-void ReadFASTAFile(std::string &file_name);
+#include "read_file.h"
 
 //Header guard end
 #endif

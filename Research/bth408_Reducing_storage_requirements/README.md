@@ -98,7 +98,3 @@ C and G nucleobases occure less frequently then A and T nucleobases.
 Because we want to find rare k-mers we should assign the following numbers to each nucleobase: 0,1,2,3 are C,A,T,G respectively.  
 
 There are many different ways of ordering k-mers.  
-
-
-
-

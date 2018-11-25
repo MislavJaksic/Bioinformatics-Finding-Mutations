@@ -1,19 +1,88 @@
 # depslib dependency file v1.0
-1543013979 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.cpp
+1543097571 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.cpp
 	"main.h"
 
-1543005033 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
-	<iostream>
-	<string>
-	<fstream>
-	<array>
-	<vector>
-	"read_fasta_file.h"
+1543076437 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
+	"read_file.h"
 
-1543014485 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta_file.cpp
+1543074626 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta_file.cpp
 	"main.h"
 
-1543014294 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta_file.h
+1543074307 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta_file.h
+	"type_aliases.h"
 
 1543004540 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\unit_testing.cpp
+
+1543060194 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\standard_includes.h
+	<iostream>
+	<fstream>
+	<string>
+	<array>
+	<vector>
+	<typeinfo>
+
+1543062206 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\type_aliases.h
+	<string>
+	<fstream>
+	<vector>
+
+1543097074 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\fasta_wrapper.h
+	"type_aliases.h"
+	"standard_include.h"
+	"string_helper.h"
+	"vector_helper.h"
+	"map_helper.h"
+
+1543097298 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\fasta_wrapper.cpp
+	"fasta_wrapper.h"
+
+1543082537 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_file.h
+	"type_aliases.h"
+	"standard_include.h"
+	"fasta_wrapper.h"
+	"stream_helper.h"
+	"string_helper.h"
+	"vector_helper.h"
+
+1543077950 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\string_helper.cpp
+	"string_helper.h"
+
+1543082569 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\stream_helper.cpp
+	"stream_helper.h"
+
+1543082568 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\stream_helper.h
+	"type_aliases.h"
+	"standard_include.h"
+
+1543095222 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\standard_include.h
+	<iostream>
+	<fstream>
+	<string>
+	<array>
+	<vector>
+	<typeinfo>
+	<algorithm>
+	<map>
+
+1543078162 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\vector_helper.cpp
+	"vector_helper.h"
+
+1543078173 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\vector_helper.h
+	"type_aliases.h"
+	"standard_include.h"
+	"string_helper.h"
+
+1543077957 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\string_helper.h
+	"type_aliases.h"
+	"standard_include.h"
+
+1543082752 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_file.cpp
+	"read_file.h"
+
+1543097533 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\map_helper.cpp
+	"map_helper.h"
+
+1543097460 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\map_helper.h
+	"type_aliases.h"
+	"standard_include.h"
 
