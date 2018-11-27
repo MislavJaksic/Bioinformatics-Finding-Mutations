@@ -1,33 +1,32 @@
 #include "read_file.h"
 
-FastaWrapper ReadFastaFile(String &file_name) {
-  InputFileStream input_stream = CreateInputStream(file_name);
+SequenceWrapper ReadFastaFile(StringWrapper &file_name) {
+  std::ifstream stream = CreateInputStream(file_name);
+  InputFileStreamWrapper input_stream{stream};
 
-  FastaWrapper wrapper = LoadFasta(input_stream);
+  SequenceWrapper wrapper = LoadFasta(input_stream);
 
-  Close(input_stream);
+  input_stream.Close();
   return wrapper;
 }
 
-FastaWrapper LoadFasta(InputFileStream &input_stream) {
-  CharVector description;
-  CharVector sequence;
+SequenceWrapper LoadFasta(InputFileStreamWrapper &input_stream) {
+  std::vector<char> description;
+  std::vector<char> sequence;
 
-  while (IsAllFlagsGood(input_stream)) {
-    String line = ReadLine(input_stream);
+  while (input_stream.IsAllFlagsGood()) {
+    StringWrapper line = input_stream.ReadLine();
 
-    if (IsFull(line)) {
-      if (IsBeginsWithGreaterThen(line)) {
-        //std::cout << "Intro: " << line << std::endl;
-        description = AppendStringToVector(line, description);
+    if (line.IsFull()) {
+      if (line.IsBeginsWithGreaterThen()) {
+        description = AppendStringWrapperToVector(line, description);
       } else {
-        //std::cout << "Genome: " << line << std::endl;
-        sequence = AppendStringToVector(line, sequence);
+        sequence = AppendStringWrapperToVector(line, sequence);
       }
     }
   }
 
-  FastaWrapper wrapper{description, sequence};
+  SequenceWrapper wrapper{description, sequence};
 
   return wrapper;
 }

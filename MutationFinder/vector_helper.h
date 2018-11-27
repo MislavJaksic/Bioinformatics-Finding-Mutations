@@ -2,15 +2,14 @@
 #define VECTOR_HELPER
 
 //Aliases
-#include "type_aliases.h"
 
 //Includes
 #include "standard_include.h"
-#include "string_helper.h"
+#include "string_wrapper.h"
 
 //Declarations
-CharVector& AppendStringToVector(String &string, CharVector &vector);
+std::vector<char>& AppendStringWrapperToVector(StringWrapper &string, std::vector<char> &vector);
 
-unsigned int Length(CharVector &vector);
+unsigned int Length(std::vector<char> &vector);
 
 #endif // VECTOR_HELPER

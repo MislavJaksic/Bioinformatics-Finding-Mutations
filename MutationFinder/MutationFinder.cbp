@@ -35,24 +35,23 @@
 		<Unit filename="ecoli_iai39.fasta" />
 		<Unit filename="ecoli_o157.fasta" />
 		<Unit filename="empty.fasta" />
-		<Unit filename="fasta_wrapper.cpp" />
-		<Unit filename="fasta_wrapper.h" />
+		<Unit filename="input_file_stream_wrapper.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
-		<Unit filename="map_helper.cpp" />
-		<Unit filename="map_helper.h" />
+		<Unit filename="map_wrapper_template.h" />
 		<Unit filename="read_file.cpp" />
 		<Unit filename="read_file.h" />
 		<Unit filename="sample_A.fasta" />
 		<Unit filename="sample_B.fasta" />
+		<Unit filename="sequence_wrapper.h" />
 		<Unit filename="standard_include.h" />
 		<Unit filename="stream_helper.cpp" />
 		<Unit filename="stream_helper.h" />
-		<Unit filename="string_helper.cpp" />
-		<Unit filename="string_helper.h" />
+		<Unit filename="string_wrapper.h" />
 		<Unit filename="type_aliases.h" />
 		<Unit filename="vector_helper.cpp" />
 		<Unit filename="vector_helper.h" />
+		<Unit filename="vector_wrapper_template.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -3,18 +3,18 @@
 #define READ_FILE
 
 //Aliases
-#include "type_aliases.h"
 
 //Includes
 #include "standard_include.h"
-#include "fasta_wrapper.h"
-#include "stream_helper.h"
-#include "string_helper.h"
+#include "sequence_wrapper.h"
+#include "input_file_stream_wrapper.h"
+#include "string_wrapper.h"
 #include "vector_helper.h"
+#include "stream_helper.h"
 
 //Declarations
-FastaWrapper ReadFastaFile(String &file_name);
-FastaWrapper LoadFasta(InputFileStream &input_stream);
+SequenceWrapper ReadFastaFile(StringWrapper &file_name);
+SequenceWrapper LoadFasta(InputFileStreamWrapper &input_stream);
 
 //Header guard end
 #endif

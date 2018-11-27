@@ -1,8 +1,8 @@
 #include "vector_helper.h"
 
-CharVector& AppendStringToVector(String &string, CharVector &vector) {
-  for (unsigned int i = 0; i < Length(string); i++) {
-    char character = string[i];
+std::vector<char>& AppendStringWrapperToVector(StringWrapper &string, std::vector<char> &vector) {
+  for (unsigned int i = 0; i < string.Length(); i++) {
+    char character = string.GetChar(i);
     vector.push_back(character);
   }
   return vector;
@@ -10,6 +10,6 @@ CharVector& AppendStringToVector(String &string, CharVector &vector) {
 
 
 
-unsigned int Length(CharVector &vector) {
+unsigned int Length(std::vector<char> &vector) {
   return vector.size();
 }
