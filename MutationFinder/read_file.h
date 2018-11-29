@@ -9,7 +9,6 @@
 #include "sequence_wrapper.h"
 #include "input_file_stream_wrapper.h"
 #include "string_wrapper.h"
-#include "vector_helper.h"
 #include "stream_helper.h"
 
 //Declarations

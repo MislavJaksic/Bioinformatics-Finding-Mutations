@@ -1,9 +1,12 @@
 # depslib dependency file v1.0
-1543353113 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.cpp
+1543480524 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.cpp
 	"main.h"
 
-1543130572 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
+1543480524 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
+	"string_wrapper.h"
 	"read_file.h"
+	"sequence_wrapper.h"
+	"map_wrapper_template.h"
 
 1543074626 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta_file.cpp
 	"main.h"
@@ -33,21 +36,20 @@
 1543097298 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\fasta_wrapper.cpp
 	"fasta_wrapper.h"
 
-1543358381 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_file.h
+1543480524 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_file.h
 	"standard_include.h"
 	"sequence_wrapper.h"
 	"input_file_stream_wrapper.h"
 	"string_wrapper.h"
-	"vector_helper.h"
 	"stream_helper.h"
 
 1543130572 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\string_helper.cpp
 	"string_helper.h"
 
-1543358260 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\stream_helper.cpp
+1543397670 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\stream_helper.cpp
 	"stream_helper.h"
 
-1543358442 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\stream_helper.h
+1543397669 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\stream_helper.h
 	"standard_include.h"
 	"string_wrapper.h"
 
@@ -72,7 +74,7 @@
 	"type_aliases.h"
 	"standard_include.h"
 
-1543358143 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_file.cpp
+1543480524 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_file.cpp
 	"read_file.h"
 
 1543130572 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\map_helper.cpp
@@ -85,19 +87,35 @@
 1543309032 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\sequence_wrapper.cpp
 	"sequence_wrapper.h"
 
-1543358407 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\sequence_wrapper.h
+1543482829 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\sequence_wrapper.h
 	"standard_include.h"
 	"string_wrapper.h"
-	"vector_helper.h"
+	"map_wrapper_template.h"
+	"vector_wrapper_template.h"
+	"kmer_triple.h"
+
+1543480524 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\map_wrapper_template.h
+	"standard_include.h"
+
+1543480524 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\string_wrapper.h
+	"standard_include.h"
+
+1543396254 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\input_file_stream_wrapper.h
+	"standard_include.h"
+	"string_wrapper.h"
+
+1543484195 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\vector_wrapper_template.h
+	"standard_include.h"
+	"string_wrapper.h"
 	"map_wrapper_template.h"
 
-1543358374 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\map_wrapper_template.h
+1543480524 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmer_triple.h
 	"standard_include.h"
+	"kmer.h"
 
-1543358442 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\string_wrapper.h
-	"standard_include.h"
+1543480524 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmer.h
+	"vector_wrapper_template.h"
 
-1543358339 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\input_file_stream_wrapper.h
-	"standard_include.h"
-	"string_wrapper.h"
+1543483913 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\vector_wrapper_template.cpp
+	"vector_wrapper_template.h"
 

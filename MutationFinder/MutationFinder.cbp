@@ -48,9 +48,7 @@
 		<Unit filename="stream_helper.cpp" />
 		<Unit filename="stream_helper.h" />
 		<Unit filename="string_wrapper.h" />
-		<Unit filename="type_aliases.h" />
-		<Unit filename="vector_helper.cpp" />
-		<Unit filename="vector_helper.h" />
+		<Unit filename="vector_wrapper_template.cpp" />
 		<Unit filename="vector_wrapper_template.h" />
 		<Extensions>
 			<code_completion />

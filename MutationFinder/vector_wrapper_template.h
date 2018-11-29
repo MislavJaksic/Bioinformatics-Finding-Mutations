@@ -4,10 +4,11 @@
 //Includes
 #include "standard_include.h"
 #include "string_wrapper.h"
+#include "map_wrapper_template.h"
 
 //Declarations
 class VectorWrapper {
-private:
+protected:
   std::vector<char> vector;
 
 public:
@@ -17,11 +18,35 @@ public:
 
 
 
-  void AppendString(StringWrapper &string) {
+  void Append(char &character) {
+    this->vector.push_back(character);
+  }
+
+  void Append(StringWrapper &string) {
+    char character;
     for (unsigned int i = 0; i < string.Length(); i++) {
-      char character = string.GetChar(i);
+      character = string.GetChar(i);
       this->vector.push_back(character);
     }
+  }
+
+
+
+  void Transform(MapWrapper<char, char> &map) {
+    char character;
+    for (unsigned int i = 0; i < this->vector.size(); i++) {
+      character = this->vector[i];
+      if (map.IsExists(character)) {
+        this->vector[i] = map.Get(character);
+      }
+
+    }
+  }
+
+
+
+  char& operator[](const unsigned int &i) {
+    return this->vector[i];
   }
 
 
@@ -36,9 +61,12 @@ public:
     for (auto& element : this->vector) {
       std::cout << element;
     }
-    std::cout << std::endl;
   }
 };
+
+bool operator< (VectorWrapper &vector_A, VectorWrapper &vector_B);
+
+
 /*template <class V>
 class VectorWrapper {
 private:

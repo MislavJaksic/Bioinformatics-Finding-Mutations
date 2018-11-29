@@ -24,7 +24,7 @@ public:
     return this->string;
   }
 
-  char GetChar(unsigned int &i) {
+  char GetChar(const unsigned int &i) {
     return this->string[i];
   }
 

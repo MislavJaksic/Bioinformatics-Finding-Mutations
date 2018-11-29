@@ -9,14 +9,14 @@
 //Declarations
 template <class K, class V>
 class MapWrapper {
-public:
+private:
   std::map<K, V> map;
-
+public:
   MapWrapper(std::map<K, V> map) :
     map(map) {
   }
 
-  void Set(K &key, V &value) {
+  void Set(K key, V value) {
     map[key] = value;
   }
 
