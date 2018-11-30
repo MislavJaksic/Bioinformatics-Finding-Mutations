@@ -12,7 +12,7 @@ class MapWrapper {
 private:
   std::map<K, V> map;
 public:
-  MapWrapper(std::map<K, V> map) :
+  MapWrapper(std::map<K, V> &map) :
     map(map) {
   }
 

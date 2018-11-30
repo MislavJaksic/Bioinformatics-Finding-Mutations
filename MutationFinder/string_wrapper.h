@@ -12,11 +12,13 @@ private:
   std::string string;
 
 public:
-  StringWrapper(std::string string) :
+  StringWrapper(std::string &string) :
     string(string) {
   }
 
-  void Set(std::string string) {
+
+
+  void Set(std::string &string) {
     this->string = string;
   }
 
@@ -24,7 +26,7 @@ public:
     return this->string;
   }
 
-  char GetChar(const unsigned int &i) {
+  char GetChar(const unsigned int i) {
     return this->string[i];
   }
 

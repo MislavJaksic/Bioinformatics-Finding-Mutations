@@ -34,12 +34,12 @@ public:
 
 
 
-  void Close() {
-    this->stream.close();
-  }
-
   void ResetFlags() {
     this->stream.clear();
+  }
+
+  void Close() {
+    this->stream.close();
   }
 };
 

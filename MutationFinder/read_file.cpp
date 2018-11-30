@@ -5,20 +5,20 @@ SequenceWrapper ReadFastaFile(StringWrapper &file_name) {
   InputFileStreamWrapper input_stream{init_stream};
 
   SequenceWrapper wrapper = LoadFasta(input_stream);
-
   input_stream.Close();
+
   return wrapper;
 }
 
 SequenceWrapper LoadFasta(InputFileStreamWrapper &input_stream) {
   std::vector<char> init_description;
   std::vector<char> init_sequence;
-  std::vector<KmerTriple> init_minimizers;
   VectorWrapper description{init_description};
   VectorWrapper sequence{init_sequence};
 
   std::string init_string;
   StringWrapper line{init_string};
+
   while (input_stream.IsAllFlagsGood()) {
     line = input_stream.ReadLine();
 
@@ -31,6 +31,7 @@ SequenceWrapper LoadFasta(InputFileStreamWrapper &input_stream) {
     }
   }
 
+  std::vector<KmerTriple> init_minimizers;
   SequenceWrapper wrapper{description, sequence, init_minimizers};
 
   return wrapper;

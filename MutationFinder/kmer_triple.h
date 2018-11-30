@@ -9,14 +9,16 @@ class KmerTriple {
 private:
   Kmer kmer;
   int string_id;
-  int position_in_string;
+  unsigned int position_in_string;
 
 public:
-  KmerTriple(Kmer init_kmer, int init_string_id, int init_position_in_string) :
+  KmerTriple(Kmer &init_kmer, int &init_string_id, unsigned int &init_position_in_string) :
     kmer(init_kmer),
     string_id(init_string_id),
     position_in_string(init_position_in_string) {
   }
+
+
 
   void Print() {
     std::cout << "(";
@@ -27,8 +29,6 @@ public:
     std::cout << this->position_in_string;
     std::cout << ")" << std::endl;
   }
-
-
 };
 
 

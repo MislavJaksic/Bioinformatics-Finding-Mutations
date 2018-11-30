@@ -32,10 +32,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="ecoli_iai39.fasta" />
-		<Unit filename="ecoli_o157.fasta" />
-		<Unit filename="empty.fasta" />
+		<Unit filename="ecoli.fasta" />
 		<Unit filename="input_file_stream_wrapper.h" />
+		<Unit filename="kmer.h" />
+		<Unit filename="kmer_triple.h" />
+		<Unit filename="lambda.fasta" />
+		<Unit filename="lambda_simulated_reads.fasta" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
 		<Unit filename="map_wrapper_template.h" />

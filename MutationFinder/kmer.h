@@ -6,10 +6,9 @@
 
 class Kmer : public VectorWrapper {
 public:
-  Kmer(std::vector<char> vector) :
+  Kmer(std::vector<char> &vector) :
     VectorWrapper(vector) {
   }
-
 };
 
 

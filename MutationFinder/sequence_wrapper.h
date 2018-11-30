@@ -27,91 +27,85 @@ public:
 
 
   void AppendDescription(StringWrapper &string) {
-    char character;
-    for (unsigned int i = 0; i < string.Length(); i++) {
-      character = string.GetChar(i);
-      description.Append(character);
-    }
+    description.Append(string);
   }
 
   void AppendSequence(StringWrapper &string) {
-    char character;
-    for (unsigned int i = 0; i < string.Length(); i++) {
-      character = string.GetChar(i);
-      sequence.Append(character);
-    }
+    sequence.Append(string);
   }
 
 
 
-  void FindMinimizers(unsigned int window_length, unsigned int kmer_length) {
+  /*
+  Given an imaginary sequence 1003332222, window length 5 and kmer length 3
+  the following minimizers would be extracted:
+  10033 -> 003
+  00333 -> 003
+  03332 -> 033
+  33322 -> 322
+  33222 -> 222
+  32222 -> 222
+  Position duplicates are removed automatically.
+  */
+  void ExtractMinimizerKmersOfLengthInWindow(unsigned int kmer_length, unsigned int window_length) {
     unsigned int window_position = 0;
-    unsigned int inner_position = 1;
-    unsigned int compare_offset;
-    unsigned int candidate_position = 0;
+    unsigned int minimizer_position = 0;
 
-    unsigned int sequence_length = this->sequence.Length();
-    unsigned int max_window = sequence_length - window_length + 1;
-    unsigned int max_inner_position;
-    unsigned int max_compare_offset = kmer_length;
-
-    /*std::vector<char> init_vector;
-    Kmer minimizer_candidate{init_vector};
-    Kmer current_kmer{init_vector};*/
+    unsigned int max_window = this->sequence.Length() - window_length + 1;
 
     while (window_position < max_window) {
+      minimizer_position = this->FindKmerMinimizerInWindowOfLength(kmer_length, window_position, window_length);
+      this->AppendMinimizer(minimizer_position, kmer_length);
 
-      max_inner_position = window_position + (window_length - kmer_length) + 1;
-      while (inner_position < max_inner_position) {
-
-        compare_offset = 0;
-        while (compare_offset < max_compare_offset) {
-          if (sequence[inner_position + compare_offset] > sequence[candidate_position + compare_offset]) {
-
-            //new candidate, record last as minimizer
-          } else if (sequence[inner_position + compare_offset] < sequence[candidate_position + compare_offset]) {
-            break;
-          }
-          compare_offset++;
-        }
-
-        std::cout << "inner:" << inner_position << " " << sequence[inner_position] << std::endl;
-        inner_position++;
-      }
-      /*if (minimizer_candidate[b] > this->sequence[a + b]) {
-        for (unsigned int c = 0; c < kmer_length; c++) {
-          //minimizer_candidate[c] =
-        }
-      }*/
-      std::cout << "window:" << window_position << std::endl;
-      window_position++;
+      window_position = window_position + (minimizer_position - window_position) + 1;
     }
-    std::cout << window_length << std::endl;
-    std::cout << kmer_length << std::endl;
-    //TODO
+
+    unsigned int correct_cutoff_position = this->FindKmerMinimizerInWindowOfLength(kmer_length, max_window - 1, window_length);
+    if (minimizer_position != correct_cutoff_position) {
+      this->AppendMinimizer(FindKmerMinimizerInWindowOfLength(kmer_length, max_window - 1, window_length), kmer_length);
+    }
+
+    this->Shrink();
+  }
+
+  unsigned int FindKmerMinimizerInWindowOfLength(unsigned int minimizer_length, unsigned int window_position, unsigned int window_length) {
+    unsigned int candidate = window_position;
+
+    unsigned int max_length = window_length - minimizer_length + 1;
+
+    for (unsigned int i = 0; i < max_length; i++) {
+      if (this->IsCandidateBiggerThenCurrentOfLength(candidate, window_position + i, minimizer_length)) {
+        candidate = window_position + i;
+      }
+    }
+    return candidate;
+  }
+
+  bool IsCandidateBiggerThenCurrentOfLength(unsigned int one, unsigned int two, unsigned int length) {
+    return this->sequence.IsOneGreaterThenTwoOfLength(one, two, length);
+  }
+
+  void AppendMinimizer(unsigned int position, unsigned int length) {
+    std::vector<char> vector;
+    for (unsigned int i = 0; i < length; i++) {
+      vector.push_back(this->sequence[position + i]);
+    }
+    Kmer kmer{vector};
+    int minus_one = -1;
+
+    KmerTriple triple{kmer, minus_one, position};
+
+    minimizers.push_back(triple);
   }
 
 
 
   void TransformSequence(MapWrapper<char, char> &map) {
-    sequence.Transform(map);
+    this->sequence.Transform(map);
   }
 
-  MapWrapper<char, int> CountOccurrences() {
-    std::map<char, int> init_map;
-    MapWrapper<char, int> occurrences{init_map};
-
-    char character;
-    for (unsigned int i = 0; i < sequence.Length(); i++) {
-      character = sequence[i];
-      if (occurrences.IsExists(character)) {
-        int count_plus_one = occurrences.Get(character) + 1;
-        occurrences.Set(character, count_plus_one);
-      } else {
-        int one = 1;
-        occurrences.Set(character, one);
-      }
-    }
+  MapWrapper<char, int> CountSequenceValues() {
+    MapWrapper<char, int> occurrences = this->sequence.CountValues();
 
     return occurrences;
   }
@@ -134,6 +128,20 @@ public:
     }
     std::cout << "..." << std::endl;
 
+  }
+
+  void PrintMinimizers(){
+    for (unsigned int i = 0; i < this->minimizers.size(); i++) {
+      this->minimizers[i].Print();
+    }
+  }
+
+
+
+  void Shrink(){
+    this->description.Shrink();
+    this->sequence.Shrink();
+    this->minimizers.shrink_to_fit();
   }
 };
 
