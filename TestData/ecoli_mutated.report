@@ -1,0 +1,19 @@
+[Reference]:
+Number of mutations: 19494
+Edit distance: 19475 
+Reconstructed edit distance: 1052
+
+[Reads]:
+Number of sequences: 31415
+Total sequence length: 250313114
+Coverage: 53.93x
+Min sequence length: 995
+Max sequence length: 43947
+Median of sequence lengths: 7760.00
+Median error rate: 13.99%
+Median insertion rate: 4.43%
+Median deletion rate: 4.24%
+Median mismatch rate: 5.28%
+Median match rate: 90.26%
+
+[Jaccard]: 0.824952583615

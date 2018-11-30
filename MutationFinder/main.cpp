@@ -28,5 +28,7 @@ int main(void) {
   wrapper_A.Print();
   wrapper_B.Print();
 
+  wrapper_A.FindMinimizers(5, 3);
+
   return 0;
 }

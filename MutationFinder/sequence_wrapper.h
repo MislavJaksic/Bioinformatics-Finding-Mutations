@@ -44,24 +44,48 @@ public:
 
 
 
-  void FindMinimizers(unsigned int &window_length, unsigned int &kmer_length) {
-    /*unsigned int a = 0;
-    unsigned int b = 0;
-    unsigned int sequence_length = this->sequence.Length();
+  void FindMinimizers(unsigned int window_length, unsigned int kmer_length) {
+    unsigned int window_position = 0;
+    unsigned int inner_position = 1;
+    unsigned int compare_offset;
+    unsigned int candidate_position = 0;
 
-    std::vector<char> init_vector;
+    unsigned int sequence_length = this->sequence.Length();
+    unsigned int max_window = sequence_length - window_length + 1;
+    unsigned int max_inner_position;
+    unsigned int max_compare_offset = kmer_length;
+
+    /*std::vector<char> init_vector;
     Kmer minimizer_candidate{init_vector};
     Kmer current_kmer{init_vector};*/
 
+    while (window_position < max_window) {
 
-    /*while (a < sequence_length) {
-      if (minimizer_candidate[b] > this->sequence[a + b]) {
+      max_inner_position = window_position + (window_length - kmer_length) + 1;
+      while (inner_position < max_inner_position) {
+
+        compare_offset = 0;
+        while (compare_offset < max_compare_offset) {
+          if (sequence[inner_position + compare_offset] > sequence[candidate_position + compare_offset]) {
+
+            //new candidate, record last as minimizer
+          } else if (sequence[inner_position + compare_offset] < sequence[candidate_position + compare_offset]) {
+            break;
+          }
+          compare_offset++;
+        }
+
+        std::cout << "inner:" << inner_position << " " << sequence[inner_position] << std::endl;
+        inner_position++;
+      }
+      /*if (minimizer_candidate[b] > this->sequence[a + b]) {
         for (unsigned int c = 0; c < kmer_length; c++) {
           //minimizer_candidate[c] =
         }
-      }
-      a++;
-    }*/
+      }*/
+      std::cout << "window:" << window_position << std::endl;
+      window_position++;
+    }
     std::cout << window_length << std::endl;
     std::cout << kmer_length << std::endl;
     //TODO

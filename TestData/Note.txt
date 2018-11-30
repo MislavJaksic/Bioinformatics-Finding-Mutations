@@ -1,0 +1,4 @@
+Missing files:
+ecoli_simulated_reads.fasta - too big, 240MB  
+
+
