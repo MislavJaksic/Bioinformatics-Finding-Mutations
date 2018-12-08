@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# Files too big to be commited to GitHub (over 100MB)
+TestData/ecoli_simulated_reads.fasta 
