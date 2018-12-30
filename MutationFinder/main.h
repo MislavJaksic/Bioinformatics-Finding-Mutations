@@ -2,8 +2,6 @@
 #ifndef MAIN
 #define MAIN
 
-//Aliases
-
 //Includes
 #include "string_wrapper.h"
 #include "read_file.h"

@@ -6,6 +6,8 @@
 #include "string_wrapper.h"
 #include "map_wrapper_template.h"
 
+
+
 //Declarations
 class VectorWrapper {
 protected:
@@ -14,6 +16,36 @@ protected:
 public:
   VectorWrapper(std::vector<char> &vector) :
     vector(vector) {
+  }
+
+  friend bool operator< (const VectorWrapper &vector_A, const VectorWrapper &vector_B) {
+    unsigned int length_A = vector_A.vector.size();
+    unsigned int length_B = vector_B.vector.size();
+
+    if (length_A < length_B) {
+      return true;
+    } else if (length_A > length_B) {
+      return false;
+    }
+
+    for (unsigned int i = 0; i < length_A; i++) {
+      if (vector_A.vector[i] > vector_B.vector[i]) {
+        return false;
+      } else if (vector_A.vector[i] < vector_B.vector[i]) {
+        return true;
+      }
+    }
+    return true;
+  }
+
+  friend std::ostream& operator<< (std::ostream &out, const VectorWrapper &wrapper) {
+    out << "(";
+    for (auto& element : wrapper.vector) {
+      out << element;
+    }
+    out << ")";
+
+    return out;
   }
 
 
@@ -70,12 +102,25 @@ public:
     return this->vector[i];
   }
 
-  bool IsOneGreaterThenTwoOfLength(unsigned int one, unsigned int two, unsigned int length) {
+  bool IsOneGreaterThenTwoOfLength(unsigned int one, unsigned int two, unsigned int length, bool is_reverse) {
+    std::map<char, char> init_map;
+    MapWrapper<char, char> reverse_nucleobases{init_map};
+    reverse_nucleobases.Set('1', '2');
+    reverse_nucleobases.Set('2', '1');
+    reverse_nucleobases.Set('3', '0');
+    reverse_nucleobases.Set('0', '3');
+
     char char_one;
     char char_two;
     for (unsigned int i = 0; i < length; i++) {
       char_one = this->vector[one + i];
       char_two = this->vector[two + i];
+
+      if (is_reverse) {
+        char_one = reverse_nucleobases.Get(char_one);
+        char_two = reverse_nucleobases.Get(char_two);
+      }
+
       if (char_one > char_two) {
         return true;
       } else if (char_one < char_two) {
@@ -88,7 +133,6 @@ public:
   unsigned int Length() {
     return this->vector.size();
   }
-
 
 
 
@@ -110,43 +154,12 @@ public:
   void Shrink() {
     this->vector.shrink_to_fit();
   }
+
+  void Clear() {
+    this->vector.clear();
+  }
 };
 
-bool operator< (VectorWrapper &vector_A, VectorWrapper &vector_B);
 
-
-/*template <class V>
-class VectorWrapper {
-private:
-  std::vector<V> vector;
-
-public:
-  VectorWrapper(std::vector<V> vector) :
-    vector(vector) {
-  }
-
-
-
-  void AppendString(StringWrapper &string) {
-    for (unsigned int i = 0; i < string.Length(); i++) {
-      char character = string.GetChar(i);
-      this->vector.push_back(character);
-    }
-  }
-
-
-
-  unsigned int Length() {
-    return this->vector.size();
-  }
-
-
-
-  void Print() {
-    for (auto& element : this->vector) {
-      std::cout << element;
-    }
-  }
-};*/
 
 #endif // VECTOR_WRAPPER_TEMPLATE

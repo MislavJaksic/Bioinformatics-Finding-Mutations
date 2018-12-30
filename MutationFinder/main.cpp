@@ -1,21 +1,23 @@
 #include "main.h"
 
-int main(void) {
-  std::string init_string = "ecoli.fasta";
-  StringWrapper file_name{init_string};
-  SequenceWrapper wrapper_A = ReadFastaFile(file_name);
 
+
+int main(void) {
+  //std::string init_string = "lambda.fasta";
+  std::string init_string = "sample_A.fasta";
+  StringWrapper file_name{init_string};
+  std::vector<SequenceWrapper> sequences_A = ReadFastaFile(file_name);
+  SequenceWrapper wrapper_A = sequences_A[0];
+
+  //init_string = "lambda_simulated_reads.fasta";
   init_string = "sample_B.fasta";
   file_name.Set(init_string);
-  SequenceWrapper wrapper_B = ReadFastaFile(file_name);
+  std::vector<SequenceWrapper> sequences_B = ReadFastaFile(file_name);
 
   wrapper_A.Print();
-  wrapper_B.Print();
 
   MapWrapper<char, int> letters_A = wrapper_A.CountSequenceValues();
   letters_A.Print();
-  MapWrapper<char, int> letters_B = wrapper_B.CountSequenceValues();
-  letters_B.Print();
 
 
   std::map<char, char> init_map;
@@ -28,8 +30,17 @@ int main(void) {
   wrapper_A.TransformSequence(letter_digit);
   wrapper_A.Print();
 
-  wrapper_A.ExtractMinimizerKmersOfLengthInWindow(3, 5);
-  //wrapper_A.PrintMinimizers();
+  wrapper_A.ExtractMinimizerKmersOfLengthInWindow(5, 10);
+  wrapper_A.PrintMinimizers();
+
+  wrapper_A.IndexKmerMinimizers();
+  wrapper_A.PrintIndex();
+
+  for (auto& element : sequences_B) {
+    element.TransformSequence(letter_digit);
+    element.ExtractMinimizerKmersOfLengthInWindow(5, 10);
+    element.PrintMinimizers();
+  }
 
   return 0;
 }

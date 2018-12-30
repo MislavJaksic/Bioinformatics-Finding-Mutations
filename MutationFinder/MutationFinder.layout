@@ -2,114 +2,89 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="read_file.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="standard_include.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="446" topLine="1" />
+			<Cursor1 position="68" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="sequence_wrapper.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="vector_char_wrapper.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1065" topLine="13" />
+			<Cursor1 position="80" topLine="0" />
 		</Cursor>
-		<Folding>
-			<Collapse line="28" />
-			<Collapse line="32" />
-			<Collapse line="38" />
-			<Collapse line="83" />
-			<Collapse line="87" />
-			<Collapse line="102" />
-			<Collapse line="106" />
-			<Collapse line="114" />
-			<Collapse line="132" />
-			<Collapse line="140" />
-		</Folding>
+	</File>
+	<File name="read_file.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="296" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1184" topLine="0" />
+		</Cursor>
 	</File>
 	<File name="string_wrapper.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="424" topLine="11" />
+			<Cursor1 position="147" topLine="35" />
 		</Cursor>
 	</File>
-	<File name="vector_wrapper_template.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="kmer_index.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="vector_wrapper_template.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2409" topLine="21" />
-		</Cursor>
-		<Folding>
-			<Collapse line="15" />
-			<Collapse line="20" />
-			<Collapse line="24" />
-			<Collapse line="34" />
-			<Collapse line="45" />
-			<Collapse line="68" />
-			<Collapse line="72" />
-			<Collapse line="87" />
-			<Collapse line="94" />
-			<Collapse line="109" />
-		</Folding>
-	</File>
-	<File name="map_wrapper_template.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="212" topLine="0" />
+			<Cursor1 position="1271" topLine="24" />
 		</Cursor>
 	</File>
 	<File name="sample_A.fasta" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="89" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="standard_include.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="89" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="stream_helper.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="193" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="876" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="main.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="75" topLine="0" />
+			<Cursor1 position="138" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="kmer.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="158" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="input_file_stream_wrapper.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="647" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="17" />
-			<Collapse line="27" />
-			<Collapse line="36" />
-			<Collapse line="40" />
-		</Folding>
-	</File>
-	<File name="read_file.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="348" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="stream_helper.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="30" topLine="0" />
+			<Cursor1 position="197" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="kmer_triple.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="282" topLine="0" />
+			<Cursor1 position="665" topLine="11" />
+		</Cursor>
+	</File>
+	<File name="sample_B.fasta" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="304" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="kmer_key.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1275" topLine="34" />
+		</Cursor>
+	</File>
+	<File name="input_file_stream_wrapper.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="194" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="read_file.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1911" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+			<Collapse line="14" />
+			<Collapse line="25" />
+		</Folding>
+	</File>
+	<File name="sequence_wrapper.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="443" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="map_wrapper_template.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="794" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="148" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
