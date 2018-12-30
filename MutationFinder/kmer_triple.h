@@ -8,14 +8,26 @@
 class KmerTriple {
 private:
   Kmer kmer;
-  int string_id;
+  bool is_on_reverse_helix;
   unsigned int position_in_string;
 
 public:
-  KmerTriple(Kmer &init_kmer, int &init_string_id, unsigned int &init_position_in_string) :
+  KmerTriple(Kmer &init_kmer, bool &init_is_on_reverse_helix, unsigned int &init_position_in_string) :
     kmer(init_kmer),
-    string_id(init_string_id),
+    is_on_reverse_helix(init_is_on_reverse_helix),
     position_in_string(init_position_in_string) {
+  }
+
+  Kmer GetKmer() {
+    return this->kmer;
+  }
+
+  bool GetIsReverse() {
+    return this->is_on_reverse_helix;
+  }
+
+  unsigned int GetPosition() {
+    return this->position_in_string;
   }
 
 
@@ -24,7 +36,7 @@ public:
     std::cout << "(";
     this->kmer.Print();
     std::cout << ", ";
-    std::cout << this->string_id;
+    std::cout << this->is_on_reverse_helix;
     std::cout << ", ";
     std::cout << this->position_in_string;
     std::cout << ")" << std::endl;
