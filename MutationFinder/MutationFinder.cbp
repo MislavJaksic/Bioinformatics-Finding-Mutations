@@ -35,6 +35,8 @@
 		<Unit filename="ecoli.fasta" />
 		<Unit filename="input_file_stream_wrapper.h" />
 		<Unit filename="kmer.h" />
+		<Unit filename="kmer_index.h" />
+		<Unit filename="kmer_key.h" />
 		<Unit filename="kmer_triple.h" />
 		<Unit filename="lambda.fasta" />
 		<Unit filename="lambda_simulated_reads.fasta" />
@@ -47,11 +49,8 @@
 		<Unit filename="sample_B.fasta" />
 		<Unit filename="sequence_wrapper.h" />
 		<Unit filename="standard_include.h" />
-		<Unit filename="stream_helper.cpp" />
-		<Unit filename="stream_helper.h" />
 		<Unit filename="string_wrapper.h" />
-		<Unit filename="vector_wrapper_template.cpp" />
-		<Unit filename="vector_wrapper_template.h" />
+		<Unit filename="vector_char_wrapper.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
@@ -59,6 +58,7 @@
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="" main="" init_handlers="necessary" language="CPP" />
 			</wxsmith>
+			<editor_config active="1" use_tabs="0" tab_indents="1" tab_width="4" indent="4" eol_mode="0" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

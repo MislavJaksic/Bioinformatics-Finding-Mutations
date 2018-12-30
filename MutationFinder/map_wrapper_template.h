@@ -20,7 +20,7 @@ public:
     map[key] = value;
   }
 
-  int Get(K &key) {
+  V Get(K &key) {
     return map.find(key)->second;
   }
 
@@ -33,8 +33,18 @@ public:
 
 
 
+  typename std::map<K, V>::iterator GetStartIterator() {
+    return map.begin();
+  }
+
+  typename std::map<K, V>::iterator GetEndIterator() {
+    return map.end();
+  }
+
+
+
   void Print() {
-    typename std::map<K, V>::iterator it = map.begin();
+    typename std::map<K, V>::iterator it = this->GetStartIterator();
     while (it != map.end()) {
       std::cout << it->first << " :: " << it->second << std::endl;
       it++;

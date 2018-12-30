@@ -6,6 +6,8 @@
 //Includes
 #include "standard_include.h"
 
+
+
 //Declarations
 class StringWrapper {
 private:
@@ -29,6 +31,7 @@ public:
   char GetChar(const unsigned int i) {
     return this->string[i];
   }
+
 
 
   bool IsEmpty() {
