@@ -3,10 +3,11 @@
 #define MAIN
 
 //Includes
-#include "string_wrapper.h"
-#include "read_file.h"
-#include "sequence_wrapper.h"
-#include "map_wrapper_template.h"
+#include <iostream>
+#include <vector>
+
+#include "file_functions.h"
+#include "Sequence.h"
 
 //Header guard end
 #endif

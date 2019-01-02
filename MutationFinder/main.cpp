@@ -3,43 +3,28 @@
 
 
 int main(void) {
-  //std::string init_string = "lambda.fasta";
-  std::string init_string = "sample_A.fasta";
-  StringWrapper file_name{init_string};
-  std::vector<SequenceWrapper> sequences_A = ReadFastaFile(file_name);
-  SequenceWrapper wrapper_A = sequences_A[0];
+  String file_name{"ecoli.fasta"};
 
-  //init_string = "lambda_simulated_reads.fasta";
-  init_string = "sample_B.fasta";
-  file_name.Set(init_string);
-  std::vector<SequenceWrapper> sequences_B = ReadFastaFile(file_name);
+  std::vector<Sequence> sequences_A = LoadSequencesFromFile(file_name);
+  Sequence sequence_A = sequences_A[0];
 
-  wrapper_A.Print();
+  file_name = "lambda_simulated_reads.fasta";
+  std::vector<Sequence> sequences_B = LoadSequencesFromFile(file_name);
 
-  MapWrapper<char, int> letters_A = wrapper_A.CountSequenceValues();
-  letters_A.Print();
-
-
-  std::map<char, char> init_map;
-  MapWrapper<char, char> letter_digit{init_map};
-  letter_digit.Set('A', '1');
-  letter_digit.Set('T', '2');
-  letter_digit.Set('C', '0');
-  letter_digit.Set('G', '3');
-
-  wrapper_A.TransformSequence(letter_digit);
-  wrapper_A.Print();
-
-  wrapper_A.ExtractMinimizerKmersOfLengthInWindow(5, 10);
-  wrapper_A.PrintMinimizers();
-
-  wrapper_A.IndexKmerMinimizers();
-  wrapper_A.PrintIndex();
+  sequence_A.Transform();
+  sequence_A.IndexMinimizers(3, 20);
+  std::cout << sequence_A << std::endl;
 
   for (auto& element : sequences_B) {
-    element.TransformSequence(letter_digit);
-    element.ExtractMinimizerKmersOfLengthInWindow(5, 10);
-    element.PrintMinimizers();
+    element.Transform();
+    element.ExtractMinimizers(3, 20);
+    //std::cout << element << std::endl;
+  }
+
+  Kmer kmer{'0','2','0'};
+  KmerKey key{kmer, 1};
+  for (auto& element : sequence_A.minimizer_index[key]) {
+    std::cout << element << ",";
   }
 
   return 0;

@@ -1,16 +1,20 @@
-#ifndef KMER_H
-#define KMER_H
+#ifndef KMER
+#define KMER
 
 //Includes
-#include "vector_char_wrapper.h"
+#include "CharVector.h"
 
-class Kmer : public VectorWrapper {
+//Declarations
+class Kmer : public CharVector {
 public:
-  Kmer(std::vector<char> &vector) :
-    VectorWrapper(vector) {
+  Kmer() :
+    CharVector() {
+  }
+
+  Kmer(const std::initializer_list<char> &il) :
+    CharVector(il) {
   }
 
 };
 
-
-#endif // KMER_H
+#endif

@@ -32,25 +32,33 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="CharVector.cpp" />
+		<Unit filename="CharVector.h" />
+		<Unit filename="FileReader.cpp" />
+		<Unit filename="FileReader.h" />
+		<Unit filename="Kmer.cpp" />
+		<Unit filename="Kmer.h" />
+		<Unit filename="KmerIndex.cpp" />
+		<Unit filename="KmerIndex.h" />
+		<Unit filename="KmerKey.cpp" />
+		<Unit filename="KmerKey.h" />
+		<Unit filename="KmerTriple.cpp" />
+		<Unit filename="KmerTriple.h" />
+		<Unit filename="Map.cpp" />
+		<Unit filename="Map.h" />
+		<Unit filename="Sequence.cpp" />
+		<Unit filename="Sequence.h" />
+		<Unit filename="String.cpp" />
+		<Unit filename="String.h" />
 		<Unit filename="ecoli.fasta" />
-		<Unit filename="input_file_stream_wrapper.h" />
-		<Unit filename="kmer.h" />
-		<Unit filename="kmer_index.h" />
-		<Unit filename="kmer_key.h" />
-		<Unit filename="kmer_triple.h" />
+		<Unit filename="file_functions.cpp" />
+		<Unit filename="file_functions.h" />
 		<Unit filename="lambda.fasta" />
 		<Unit filename="lambda_simulated_reads.fasta" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
-		<Unit filename="map_wrapper_template.h" />
-		<Unit filename="read_file.cpp" />
-		<Unit filename="read_file.h" />
 		<Unit filename="sample_A.fasta" />
 		<Unit filename="sample_B.fasta" />
-		<Unit filename="sequence_wrapper.h" />
-		<Unit filename="standard_include.h" />
-		<Unit filename="string_wrapper.h" />
-		<Unit filename="vector_char_wrapper.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
@@ -58,7 +66,7 @@
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="" main="" init_handlers="necessary" language="CPP" />
 			</wxsmith>
-			<editor_config active="1" use_tabs="0" tab_indents="1" tab_width="4" indent="4" eol_mode="0" />
+			<editor_config active="1" use_tabs="0" tab_indents="1" tab_width="2" indent="2" eol_mode="0" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
