@@ -56,6 +56,9 @@ public:
 
   void Print();
 
+  void Shrink();
+  void ClearMinimizers();
+  void ClearIndex();
   void Clear();
 };
 

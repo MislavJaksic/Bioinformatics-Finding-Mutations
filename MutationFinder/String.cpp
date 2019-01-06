@@ -22,7 +22,7 @@ std::ostream& operator<< (std::ostream &out, const String &string) {
 
 
 
-std::string String::GetString() const {
+const std::string& String::GetString() const {
   return this->string;
 }
 
@@ -56,6 +56,10 @@ bool String::IsNotEmpty() {
 }
 
 
+
+void String::Shrink() {
+  this->string.shrink_to_fit();
+}
 
 void String::Clear() {
   this->string.clear();

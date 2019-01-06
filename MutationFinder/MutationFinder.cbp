@@ -51,6 +51,7 @@
 		<Unit filename="String.cpp" />
 		<Unit filename="String.h" />
 		<Unit filename="ecoli.fasta" />
+		<Unit filename="ecoli_simulated_reads.fasta" />
 		<Unit filename="file_functions.cpp" />
 		<Unit filename="file_functions.h" />
 		<Unit filename="lambda.fasta" />

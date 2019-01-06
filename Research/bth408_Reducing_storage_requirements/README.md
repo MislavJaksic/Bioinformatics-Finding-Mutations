@@ -1,6 +1,6 @@
 [Research paper: Reducing storage requirements for biological sequence comparison](https://academic.oup.com/bioinformatics/article/20/18/3363/202143)
 
-** 1 INTRO
+## 1 INTRO
 
 Task: find similar substrings in strings T1 and T2.  
 Choose a short substrings called **seed**.  
@@ -28,7 +28,7 @@ s is a k-mer string (seed),
 i is a Ti string identifier,  
 p is the position of seed s in string Ti.  
 
-** 2 MINIMIZERS
+## 2 MINIMIZERS
 
 Choose a representative k-mer from adjacent k-mers such that strings Ti and Tj choose the same representative if they share a long enough subsequence.  
 **Minimizers** are a special set of k-mers. Minimizers are the substring representatives and therefor, the seeds.  
@@ -36,7 +36,7 @@ Choose a representative k-mer from adjacent k-mers such that strings Ti and Tj c
 Minimizers have the following property:  
 Property 1: if two strings Ti and Tj have a significant exact match, then AT LEAST ONE of the minimizers chosen from Ti will also be chosen from Tj.  
 
-*** 2.1 Interior minimizers
+### 2.1 Interior minimizers
 
 You must choose a k-mer ordering such as numerical/lexicographic ordering.  
 
@@ -75,7 +75,7 @@ Apply the method over and over again until you have reached the end of Ti.
 
 A gap between minimizers can be at most w - k. If you don't want any gaps, set w <= k.  
 
-*** 2.2 End minimizers
+### 2.2 End minimizers
 
 The gap mentioned is between minimizers, not between a minimizer and the end or beginning of the string.  
 
@@ -86,11 +86,11 @@ k-end-minimizers are all minimizers for u from i up to v.
 End minimizers have the following property:  
 Property 2: if ends of two strings have an exact overlap of at least k characters and at most k + v - 1, then they share at least one k end minimizer.  
 
-*** 2.3 Mixed strategy
+### 2.3 Mixed strategy
 
 Combine both (w, k) minimizers and (u, k) end minimizers for best results.  
 
-*** 2.4 Ordering
+### 2.4 Ordering
 
 To make sure you sample as few k-mers as possible and therefor save as such storage as possible, make sure you choose a good ordering.  
 
