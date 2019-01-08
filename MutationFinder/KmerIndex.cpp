@@ -48,7 +48,7 @@ std::ostream& operator<< (std::ostream &out, const KmerIndex &kmer_index) {
 
     out << std::endl;
 
-    //counter++;
+    counter++;
   }
 
   std::cout << "]";
@@ -59,15 +59,12 @@ std::ostream& operator<< (std::ostream &out, const KmerIndex &kmer_index) {
 
 
 void KmerIndex::Add(const KmerKey &key, const unsigned int &value) {
-  //std::cout << "Is exist:" << this->IsExists(key) << std::endl;
   if (this->IsExists(key)) {
     this->index[key].push_back(value);
   } else {
-    //std::cout << "Adding new vector!" << std::endl;
     std::vector<unsigned int> vector{value};
     this->index[key] = vector;
   }
-  //std::cout << "Does it exist now:" << this->IsExists(key) << std::endl;
 }
 
 
@@ -81,11 +78,11 @@ bool KmerIndex::IsExists(const KmerKey &key) const {
 
 
 
-void KmerIndex::Print() {
-
+void KmerIndex::Shrink(){
+  for (auto it = this->index.begin(); it != this->index.end(); ++it) {
+    it->second.shrink_to_fit();
+  }
 }
-
-
 
 void KmerIndex::Clear() {
   this->index.clear();

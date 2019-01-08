@@ -25,3 +25,11 @@ bool operator< (const KmerKey &key_A, const KmerKey &key_B) {
     return false;
   }
 }
+
+Kmer KmerKey::getKmer() const {
+  return this->kmer;
+}
+
+bool KmerKey::isOnReverseHelix() {
+  return this->is_on_reverse_helix;
+}

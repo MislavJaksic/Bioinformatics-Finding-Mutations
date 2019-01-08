@@ -61,6 +61,8 @@ void Sequence::ExtractMinimizers(unsigned int kmer_length, unsigned int window_l
       window_position = window_position + (true_minimizer_position - window_position) + 1;
     }
   }
+
+  this->Shrink();
 }
 
 void Sequence::IndexMinimizers(unsigned int kmer_length, unsigned int window_length) {
@@ -71,6 +73,9 @@ void Sequence::IndexMinimizers(unsigned int kmer_length, unsigned int window_len
     triple = minimizers[i];
     this->minimizer_index.Add(triple.GetKey(), triple.GetPosition());
   }
+
+  this->ClearMinimizers();
+  this->Shrink();
 }
 
 unsigned int Sequence::FindMinimizerOnHelix(unsigned int kmer_length, unsigned int window_position, unsigned int window_length, bool is_reverse_helix) {
@@ -125,7 +130,7 @@ bool Sequence::IsTrueBiggerThenReverseOfLength(unsigned int true_position, unsig
 }
 
 void Sequence::AppendMinimizer(unsigned int position, unsigned int length, bool is_reverse) {
-  Kmer kmer;;
+  Kmer kmer;
   char character;
   if (is_reverse) {
     for (unsigned int i = 0; i < length; i++) {
@@ -147,9 +152,36 @@ void Sequence::AppendMinimizer(unsigned int position, unsigned int length, bool 
 
 
 
+void Sequence::Shrink() {
+  this->description.Shrink();
+  this->sequence.Shrink();
+  this->minimizers.shrink_to_fit();
+  this->minimizer_index.Shrink();
+}
+
+void Sequence::ClearMinimizers() {
+  this->minimizers.clear();
+}
+
+void Sequence::ClearIndex() {
+  this->minimizer_index.Clear();
+}
+
 void Sequence::Clear() {
   this->description.Clear();
   this->sequence.Clear();
   this->minimizers.clear();
   this->minimizer_index.Clear();
+}
+
+const std::vector<KmerTriple>& Sequence::getMinimizers() {
+    return this->minimizers;
+}
+
+const String& Sequence::getDescription() {
+    return this->description;
+}
+
+const CharVector& Sequence::getSequence() {
+    return this->sequence;
 }

@@ -42,6 +42,7 @@ std::vector<Sequence> ReadFasta(FileReader &reader) {
       is_sequence_not_empty = true;
     }
   }
+
   Sequence sequence{fasta_description, fasta_sequence};
   sequences.push_back(sequence);
 

@@ -27,8 +27,7 @@ public:
 
   bool IsExists(const KmerKey &key) const;
 
-  void Print();
-
+  void Shrink();
   void Clear();
 };
 

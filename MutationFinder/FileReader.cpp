@@ -5,7 +5,6 @@
 String FileReader::ReadLine() {
   std::string line;
   std::getline(this->stream, line);
-  String string{line};
 
   return line;
 }

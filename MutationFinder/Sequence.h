@@ -56,7 +56,15 @@ public:
 
   void Print();
 
+  void Shrink();
+  void ClearMinimizers();
+  void ClearIndex();
   void Clear();
+
+  const std::vector<KmerTriple>& getMinimizers();
+
+  const String& getDescription();
+  const CharVector& getSequence();
 };
 
 //Header guard end
