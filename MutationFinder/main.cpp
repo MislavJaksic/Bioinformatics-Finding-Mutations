@@ -3,29 +3,49 @@
 
 
 int main(void) {
-  String file_name{"ecoli.fasta"};
+  String file_name{"lambda.fasta"};
 
-  std::vector<Sequence> sequences_A = LoadSequencesFromFile(file_name);
-  Sequence sequence_A = sequences_A[0];
+  std::vector<Sequence> single_sequence = LoadSequencesFromFile(file_name);
+  Sequence reference_genome = single_sequence[0];
 
-  file_name = "ecoli_simulated_reads.fasta";
-  std::vector<Sequence> sequences_B = LoadSequencesFromFile(file_name);
+  file_name = "lambda_simulated_reads.fasta";
+  std::vector<Sequence> reads = LoadSequencesFromFile(file_name);
 
-  sequence_A.Transform();
-  sequence_A.IndexMinimizers(20, 20);
-  std::cout << sequence_A << std::endl;
+  reference_genome.Transform();
+  reference_genome.IndexMinimizers(10, 20);
+  std::cout << reference_genome << std::endl;
 
 
 
-  for (auto& element : sequences_B) {
-    element.Transform();
-    //element.IndexMinimizers(20, 20);
-    //std::cout << element << std::endl;
+  for (auto& read : reads) {
+    read.Transform();
+    read.ExtractMinimizers(10, 20);
+    //std::cout << read << std::endl;
   }
 
-  Kmer kmer{'0','2','0'};
-  KmerKey key{kmer, 1};
-//  for (auto& element : sequence_A.minimizer_index[key]) {
+  Sequence read{reads[0]};
+  std::cout << read.GetDescription() << std::endl;
+  for (auto& minimizer : read.minimizers) {
+    KmerKey true_key{minimizer.GetKey().GetKmer(), false};
+    KmerKey reverse_key{minimizer.GetKey().GetKmer(), true};
+
+    std::vector<unsigned int> true_positions{reference_genome.minimizer_index[true_key]};
+    std::vector<unsigned int> reverse_positions{reference_genome.minimizer_index[reverse_key]};
+
+    std::cout << true_key;
+    for (auto& position : true_positions) {
+        std::cout << position << ",";
+    }
+    std::cout << std::endl;
+
+    std::cout << reverse_key;
+    for (auto& position : reverse_positions) {
+        std::cout << position << ",";
+    }
+    std::cout << std::endl;
+  }
+
+//  for (auto& element : reference_genome.minimizer_index[key]) {
 //    std::cout << element << ",";
 //  }
 

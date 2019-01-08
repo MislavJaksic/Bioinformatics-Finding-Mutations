@@ -25,8 +25,8 @@ public:
 
   friend std::ostream& operator<< (std::ostream &out, const KmerTriple &triple);
 
-  KmerKey GetKey() const;
-  unsigned int GetPosition() const;
+  const KmerKey& GetKey() const;
+  const unsigned int& GetPosition() const;
 };
 
 #endif

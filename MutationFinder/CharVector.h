@@ -36,6 +36,8 @@ public:
   std::vector<char>::iterator begin();
   std::vector<char>::iterator end();
 
+  const std::vector<char>& GetVector() const;
+
   void Append(const char &character);
   void Append(const String &string);
 

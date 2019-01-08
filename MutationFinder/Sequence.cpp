@@ -27,11 +27,22 @@ std::ostream& operator<< (std::ostream &out, const Sequence &sequence) {
     }
     out << ",";
   }
+  out << "]";
   out << std::endl;
 
   out << "Index:" << sequence.minimizer_index << std::endl;
 
   return out;
+}
+
+
+
+const String& Sequence::GetDescription() const {
+  return this->description;
+}
+
+const CharVector& Sequence::GetSequence() const {
+  return this->sequence;
 }
 
 

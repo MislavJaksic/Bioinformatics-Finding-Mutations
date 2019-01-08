@@ -25,6 +25,9 @@ public:
 
   friend std::ostream& operator<< (std::ostream &out, const KmerKey &key); //for printing
   friend bool operator< (const KmerKey &key_A, const KmerKey &key_B);
+
+  const Kmer& GetKmer() const;
+  const bool& GetIsReverse() const;
 };
 
 #endif

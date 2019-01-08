@@ -14,10 +14,10 @@ std::ostream& operator<< (std::ostream &out, const KmerTriple &triple) {
 
 
 
-KmerKey KmerTriple::GetKey() const {
+const KmerKey& KmerTriple::GetKey() const {
   return this->key;
 }
 
-unsigned int KmerTriple::GetPosition() const {
+const unsigned int& KmerTriple::GetPosition() const {
   return this->position;
 }

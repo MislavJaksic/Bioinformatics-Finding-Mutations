@@ -79,6 +79,12 @@ std::vector<char>::iterator CharVector::end() {
 
 
 
+const std::vector<char>& CharVector::GetVector() const {
+  return this->resizeable_array;
+}
+
+
+
 void CharVector::Append(const char &character) {
   this->resizeable_array.push_back(character);
 }

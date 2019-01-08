@@ -15,13 +15,12 @@ private:
   String description;
   CharVector sequence;
 
-  std::vector<KmerTriple> minimizers;
-
   static unsigned int max_print;
   static std::map<char, char> transformer;
   static std::map<char, char> reverse_nucleobase;
 
 public:
+  std::vector<KmerTriple> minimizers;
   KmerIndex minimizer_index;
 
   Sequence() :
@@ -43,6 +42,9 @@ public:
   }
 
   friend std::ostream& operator<< (std::ostream &out, const Sequence &sequence); //for printing
+
+  const String& GetDescription() const;
+  const CharVector& GetSequence() const;
 
   void Transform();
 
