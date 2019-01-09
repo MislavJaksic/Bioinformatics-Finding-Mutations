@@ -34,6 +34,16 @@ unsigned int String::Length() const {
 
 
 
+unsigned int String::SubstringPosition(const std::string& str) {
+  return this->string.find(str);
+}
+
+unsigned int String::SubstringPosition(const char* s) const {
+  return this->string.find(s);
+}
+
+
+
 bool String::IsCharAt(const char character, const unsigned int index) {
   if (this->string[index] == character) {
     return true;

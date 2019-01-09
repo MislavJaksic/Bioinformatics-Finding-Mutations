@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 #include "String.h"
 
@@ -42,6 +43,7 @@ public:
   void Append(const String &string);
 
   void Transform(std::map<char, char> &map);
+  void Reverse();
 
   unsigned int Length() const;
 

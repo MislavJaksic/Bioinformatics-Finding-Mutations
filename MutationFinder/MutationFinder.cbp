@@ -59,6 +59,7 @@
 		<Unit filename="main.h" />
 		<Unit filename="sample_A.fasta" />
 		<Unit filename="sample_B.fasta" />
+		<Unit filename="settings.ini" />
 		<Extensions>
 			<code_completion />
 			<envvars />

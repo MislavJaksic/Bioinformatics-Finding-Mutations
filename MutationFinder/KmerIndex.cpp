@@ -78,7 +78,7 @@ bool KmerIndex::IsExists(const KmerKey &key) const {
 
 
 
-void KmerIndex::Shrink(){
+void KmerIndex::Shrink() {
   for (auto it = this->index.begin(); it != this->index.end(); ++it) {
     it->second.shrink_to_fit();
   }

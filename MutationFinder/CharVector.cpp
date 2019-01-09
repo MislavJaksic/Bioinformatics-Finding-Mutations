@@ -107,6 +107,10 @@ void CharVector::Transform(std::map<char, char> &map) {
   }
 }
 
+void CharVector::Reverse() {
+  std::reverse(this->begin(), this->end());
+}
+
 
 
 unsigned int CharVector::Length() const {

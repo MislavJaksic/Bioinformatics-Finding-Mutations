@@ -2,48 +2,49 @@
 
 
 
-int main(void) {
-  String file_name{"lambda.fasta"};
+int main(int argc, char **argv) {
+  CLI::App program{"Mutation finder"};
 
+  unsigned int kmer_length;
+  unsigned int minimizer_window_length;
+  std::string reference_genome_file_name;
+  std::string reads_file_name;
+
+  program.add_option("-k, --kmer_length", kmer_length, "K-mer/minimizer length");
+  program.add_option("-l, --minimizer_window_length", minimizer_window_length, "Minimizer window length");
+  program.add_option("-g, --reference_genome_file_name", reference_genome_file_name, "Reference genome FASTA file name");
+  program.add_option("-r, --reads_file_name", reads_file_name, "Reads FASTA file name");
+  program.set_config("--config", "settings.ini", "Read an .ini settings file", true);
+
+  CLI11_PARSE(program, argc, argv);
+
+
+
+  String file_name{reference_genome_file_name};
   std::vector<Sequence> single_sequence = LoadSequencesFromFile(file_name);
   Sequence reference_genome = single_sequence[0];
 
-  file_name = "lambda_simulated_reads.fasta";
+  file_name = reads_file_name;
   std::vector<Sequence> reads = LoadSequencesFromFile(file_name);
 
   reference_genome.Transform();
-  reference_genome.IndexMinimizers(10, 20);
+  reference_genome.IndexMinimizers(kmer_length, minimizer_window_length);
   std::cout << reference_genome << std::endl;
 
 
 
   for (auto& read : reads) {
     read.Transform();
-    read.ExtractMinimizers(10, 20);
-    //std::cout << read << std::endl;
+    read.ExtractMinimizers(kmer_length, minimizer_window_length);
+    if (reference_genome.IsReverseAlignment(read)) {
+      read.Reverse();
+      read.ExtractMinimizers(kmer_length, minimizer_window_length);
+    }
+    reference_genome.CompareWithSequence(read);
+    read.ClearMinimizers();
   }
 
-  Sequence read{reads[0]};
-  std::cout << read.GetDescription() << std::endl;
-  for (auto& minimizer : read.minimizers) {
-    KmerKey true_key{minimizer.GetKey().GetKmer(), false};
-    KmerKey reverse_key{minimizer.GetKey().GetKmer(), true};
 
-    std::vector<unsigned int> true_positions{reference_genome.minimizer_index[true_key]};
-    std::vector<unsigned int> reverse_positions{reference_genome.minimizer_index[reverse_key]};
-
-    std::cout << true_key;
-    for (auto& position : true_positions) {
-        std::cout << position << ",";
-    }
-    std::cout << std::endl;
-
-    std::cout << reverse_key;
-    for (auto& position : reverse_positions) {
-        std::cout << position << ",";
-    }
-    std::cout << std::endl;
-  }
 
 //  for (auto& element : reference_genome.minimizer_index[key]) {
 //    std::cout << element << ",";

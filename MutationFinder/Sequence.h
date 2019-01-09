@@ -4,6 +4,7 @@
 
 //Includes
 #include <map>
+#include <algorithm>
 
 #include "CharVector.h"
 #include "KmerTriple.h"
@@ -47,6 +48,7 @@ public:
   const CharVector& GetSequence() const;
 
   void Transform();
+  void Reverse();
 
   void ExtractMinimizers(unsigned int kmer_length, unsigned int window_length);
   void IndexMinimizers(unsigned int kmer_length, unsigned int window_length);
@@ -55,8 +57,14 @@ public:
   bool IsOneBiggerThenTwo(unsigned int one, unsigned int two, unsigned int length, bool is_reverse);
   bool IsTrueBiggerThenReverseOfLength(unsigned int true_position, unsigned int reverse_position, unsigned int length);
   void AppendMinimizer(unsigned int position, unsigned int length, bool is_reverse);
+  void SortMinimizers();
 
-  void Print();
+  bool IsReverseAlignment(const Sequence& read);
+  void CompareWithSequence(const Sequence& read);
+  void PrintPositionSurrounding(const unsigned int& position) const;
+  void PrintFromTo(const unsigned int& from, const unsigned int& to) const;
+
+  unsigned int Length() const;
 
   void Shrink();
   void ClearMinimizers();
