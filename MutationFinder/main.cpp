@@ -12,14 +12,14 @@ int main(void) {
   std::vector<Sequence> sequences_B = LoadSequencesFromFile(file_name);
 
   sequence_A.Transform();
-  sequence_A.IndexMinimizers(20, 20);
+  sequence_A.IndexMinimizers(20, 40);
   //std::cout << sequence_A << std::endl;
 
 
 
   for (auto& element : sequences_B) {
     element.Transform();
-    element.ExtractMinimizers(20, 20);
+    element.ExtractMinimizers(20, 40);
     //std::cout << element << std::endl;
   }
 
@@ -29,46 +29,61 @@ int main(void) {
 
   for (Sequence& sequence_B : sequences_B) {
     std::cout << sequence_B.getDescription() << std::endl;
-    std::vector<unsigned int> positions = mapper.getMatchingPositions(sequence_A, sequence_B);
-    found += (positions.size() > 0) ? 1 : 0;
+    //std::vector<unsigned int> positions = mapper.getMatchingPositions(sequence_A, sequence_B);
+    std::vector<point> points = mapper.getAllMatchingPositions(sequence_A, sequence_B);
+    found += (points.size() > 1) ? 1 : 0;
 
-    if (positions.size() > 0) {
-        std::cout << "Genom = " << positions[0] << ", Fragmet = " << positions[1] << ", Reverse = " << (positions[2] == 1) << std::endl;
+    if (points.size() > 1) {
+        std::cout << "minimizer_number = " << sequence_B.getMinimizers().size() << std::endl;
+        point k_reverse = points[0];
+        std::cout << "k = " << k_reverse.x << ", Reverse = " << k_reverse.y << std::endl;
 
-        for (int i=-15; i<=35; i++) {
-            int pos_A = positions[0] + i;
-            if (i == 0 || i == 19) {
-                std::cout << " ";
+        for (int m = 1; m < (int)points.size(); m++) {
+            std::cout << "position_A = " << points[m].x << "; position_B = " << points[m].y << std::endl;
+            for (int i=-15; i<=35; i++) {
+                int pos_A = points[m].x + i;
+                if (i == 0 || i == 19) {
+                    std::cout << " ";
+                }
+                if (pos_A < 0 || pos_A >= (int)sequence_A.getSequence().Length()) {
+                    std::cout << "-";
+                } else {
+                    std::cout << reverse_transformer[sequence_A.getSequence()[pos_A]];
+                }
             }
-            if (pos_A < 0 || pos_A >= (int)sequence_A.getSequence().Length()) {
-                std::cout << "-";
-            } else {
-                std::cout << reverse_transformer[sequence_A.getSequence()[pos_A]];
+            std::cout << std::endl;
+
+            for (int i=-15; i<=35; i++) {
+                int pos_B = points[m].y + i;
+                if (i == 0 || i == 19) {
+                    std::cout << " ";
+                }
+                if (pos_B < 0 || pos_B >= (int)sequence_B.getSequence().Length()) {
+                    std::cout << "-";
+                } else {
+                    std::cout << reverse_transformer[sequence_B.getSequence()[pos_B]];
+                }
             }
+            std::cout << std::endl;
+            std::cout << std::endl;
         }
-        std::cout << std::endl;
-
-        for (int i=-15; i<=35; i++) {
-            int pos_B = positions[1] + i;
-            if (i == 0 || i == 19) {
-                std::cout << " ";
-            }
-            if (pos_B < 0 || pos_B >= (int)sequence_B.getSequence().Length()) {
-                std::cout << "-";
-            } else {
-                std::cout << reverse_transformer[sequence_B.getSequence()[pos_B]];
-            }
-        }
-        std::cout << std::endl;
     }
 
     if (found >= 1) {
-        std::cout << "Mutations = " << found << std::endl;
+
+        std::cout << "Mutations = " << std::endl;
         std::list<mutation> mutations = mapper.getMutations(sequence_A, sequence_B);
+
         for (auto& mut : mutations) {
             std::cout << mut.mutation_character << "," << mut.position << "," << mut.nucleobase << std::endl;
         }
 
+        int mut_found = mutations.size();
+        int size_B = sequence_B.getSequence().Length();
+
+        std::cout << std::endl;
+        std::cout << "sequence_size_B = " << size_B << ", mutations_found = " << mut_found << ", mutation_statistic = " <<
+            ((double)mut_found) / size_B << std::endl;
         break;
     }
 
