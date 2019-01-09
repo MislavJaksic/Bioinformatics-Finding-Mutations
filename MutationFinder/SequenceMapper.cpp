@@ -25,6 +25,10 @@ static std::map<std::tuple<char, char>, int> initPam() {
 
 std::map<std::tuple<char, char>, int> SequenceMapper::pam = initPam();
 
+bool operator==(const mutation& mut1, const mutation& mut2) {
+    return mut1.mutation_character == mut2.mutation_character && mut1.position == mut2.position && mut1.nucleobase == mut2.nucleobase;
+}
+
 std::vector<unsigned int> SequenceMapper::getMatchingPositions(Sequence &sequence_A, Sequence &sequence_B) {
   std::vector<unsigned int> positions{};
 
@@ -264,42 +268,54 @@ std::list<mutation> SequenceMapper::getGlobalMutations(Sequence &sequence_A, Seq
     }
     for (int i = 1; i<= N; i++) {
         std::tuple<int, int> m_position_1 = std::make_tuple(i, 0);
-        int zero_flag = (flag == 0) ? 0 : 1;
+        int zero_flag = 1;//(flag == 0) ? 0 : 1;
         cell c1 = {i * SequenceMapper::indel * zero_flag, i-1, 0};
         m.insert( std::pair<std::tuple<int, int>, cell>(m_position_1, c1) );
     }
 
     //std::cout << "m.size = " << m.size() << std::endl;
+    //std::cout << "N = " << N << ", M = " << M << std::endl;
 
     int opt;
     std::tuple<int, int> *best_parrent;
     const CharVector &x = sequence_B.getSequence();
     const CharVector &y = sequence_A.getSequence();
-    bool goal_cell_end_relaxation = (flag == 2);
+    bool goal_cell_end_relaxation = (flag != 1);
     cell *goal_cell = nullptr;
     int goal_cost = 1000000;
     int goal_x{0}, goal_y{0};
+    int kN = (int)(0.1*N);
+    if (N > 3000) {
+        kN = (int)(0.03*N);
+    }
 
     for (int i = 1; i <= N; i++) {
-        for (int j = 1; j <= M; j++) {
+        for (int j = std::max(1, i-kN); j <= std::min(M, i+kN); j++) {
 
             std::tuple<int, int> m_position_match = std::make_tuple(i-1, j-1);
             std::tuple<int, int> m_position_insert = std::make_tuple(i, j-1);
             std::tuple<int, int> m_position_delete = std::make_tuple(i-1, j);
-
-            opt = m[m_position_match].cost + SequenceMapper::pam[std::make_tuple(x[position_B + j-1], y[position_A + i-1])];
+            if (flag != 0) {
+                opt = m[m_position_match].cost + SequenceMapper::pam[std::make_tuple(x[position_B + j-1], y[position_A + i-1])];
+            } else {
+                opt = m[m_position_match].cost + SequenceMapper::pam[std::make_tuple(x[position_B - (j-1)], y[position_A - (i-1)])];
+            }
             best_parrent = &m_position_match;
 
-            int test = m[m_position_insert].cost + SequenceMapper::indel;
-            if (test < opt) {
-                opt = test;
-                best_parrent = &m_position_insert;
+            if (j > i-kN) {
+                int test1 = m[m_position_insert].cost + SequenceMapper::indel;
+                if (test1 < opt) {
+                    opt = test1;
+                    best_parrent = &m_position_insert;
+                }
             }
 
-            test = m[m_position_delete].cost + SequenceMapper::indel;
-            if (test < opt) {
-                opt = test;
-                best_parrent = &m_position_delete;
+            if (j < i+kN) {
+                int test2 = m[m_position_delete].cost + SequenceMapper::indel;
+                if (test2 < opt) {
+                    opt = test2;
+                    best_parrent = &m_position_delete;
+                }
             }
 
             cell c = {opt, std::get<0>(*best_parrent), std::get<1>(*best_parrent)};
@@ -349,6 +365,11 @@ std::list<mutation> SequenceMapper::getGlobalMutations(Sequence &sequence_A, Seq
         unsigned int pos_a = (unsigned int)(position_A + i-1);
         int pos_b = (int)position_B + j - 1;
 
+        if (flag == 0) {
+            pos_b = (int)position_B - (j - 1);
+            pos_a = (unsigned int)(position_A - (i-1));
+        }
+
         if (i - current_cell->parrent_x == 1 && j - current_cell->parrent_y == 1) {
             mutation mutt{'X', pos_a, reverse_nucleobase[x[pos_b]]};
             mutations.push_front(mutt);
@@ -381,10 +402,14 @@ std::list<mutation> SequenceMapper::getMutations(Sequence &sequence_A, Sequence 
     int k = points[0].x;
     bool reverse_helix = (points[0].y == 1);
 
-    int position_B = 0;
-    int M = points[1].y - position_B;
-    int position_A = (points[1].x - 2*M) >= 0 ? points[1].x - 2*M : 0;
-    int N = points[1].x - position_A;
+
+    int position_A = points[1].x;
+    int position_B = points[1].y;
+    int M = position_B + 1;
+    int N = (int)(1.2*M);
+    if (position_A - N < 0) {
+        N = position_A + 1;
+    }
 
 
     std::list<mutation> mutations = getGlobalMutations(sequence_A, sequence_B,
@@ -393,8 +418,8 @@ std::list<mutation> SequenceMapper::getMutations(Sequence &sequence_A, Sequence 
     for (int i = 1; i < (int)points.size() - 1; i++) {
         position_A = points[i].x + k - 1;
         position_B = points[i].y + k - 1;
-        N = points[i+1].x - position_A;
-        M = points[i+1].y - position_B;
+        N = points[i+1].x - position_A + 1;
+        M = points[i+1].y - position_B + 1;
         std::list<mutation> mutations_for_fragment = getGlobalMutations(sequence_A, sequence_B,
                             position_A, N, position_B, M, reverse_helix, 1);
 
@@ -406,7 +431,10 @@ std::list<mutation> SequenceMapper::getMutations(Sequence &sequence_A, Sequence 
     position_A = points[(int)points.size() - 1].x + k - 1;
     position_B = points[(int)points.size() - 1].y + k - 1;
     M = sequence_B.getSequence().Length() - position_B;
-    N = (int)(2 * M);
+    N = (int)(1.2 * M);
+    if (position_A + (unsigned int)N > sequence_A.getSequence().Length()) {
+        N = sequence_A.getSequence().Length() - position_A;
+    }
     std::list<mutation> mutations_for_fragment = getGlobalMutations(sequence_A, sequence_B,
                         position_A, N, position_B, M, reverse_helix, 2);
 

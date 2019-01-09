@@ -308,7 +308,7 @@
 1546941115 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\string.cpp
 	"String.h"
 
-1547055241 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\main.cpp
+1547072800 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\main.cpp
 	"main.h"
 
 1546941117 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\main.h
@@ -320,7 +320,7 @@
 	"Sequence.h"
 	"SequenceMapper.h"
 
-1547043637 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequencemapper.h
+1547068118 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequencemapper.h
 	<iostream>
 	<cstdlib>
 	<cstddef>
@@ -328,6 +328,6 @@
 	<list>
 	"Sequence.h"
 
-1547055226 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequencemapper.cpp
+1547066583 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequencemapper.cpp
 	"SequenceMapper.h"
 

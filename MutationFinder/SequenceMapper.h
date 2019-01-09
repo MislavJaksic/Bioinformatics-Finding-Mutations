@@ -27,6 +27,13 @@ struct cell {
   int parrent_y;
 };
 
+struct mutation_count {
+  mutation mut;
+  int number;
+};
+
+bool operator==(const mutation& mut1, const mutation& mut2);
+
 class SequenceMapper {
 
 public:
