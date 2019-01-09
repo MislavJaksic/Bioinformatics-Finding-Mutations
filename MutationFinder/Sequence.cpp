@@ -247,10 +247,12 @@ void Sequence::CompareWithSequence(const Sequence& read) {
 
       if (minimizer_print_count < max_minimizer_print) {
         std::cout << "Key: " << true_key << std::endl;
-        std::cout << "Reverse read? " << is_read_reverse << std::endl;
+        std::cout << "Complement read? " << is_read_reverse << std::endl;
 
         for (auto& reference_position : true_positions) {
+          std::cout << "Refe: ";
           this->PrintPositionSurrounding(reference_position);
+          std::cout << "Read: ";
           read.PrintPositionSurrounding(read_minimizer_position);
         }
         std::cout << std::endl;
@@ -265,10 +267,12 @@ void Sequence::CompareWithSequence(const Sequence& read) {
       }
       if (minimizer_print_count < max_minimizer_print) {
         std::cout << "Key: " << reverse_key << std::endl;
-        std::cout << "Reverse read: " << is_read_reverse << std::endl;
+        std::cout << "Complement read: " << is_read_reverse << std::endl;
 
         for (auto& reference_position : reverse_positions) {
+          std::cout << "Refe: ";
           this->PrintPositionSurrounding(reference_position);
+          std::cout << "Read: ";
           read.PrintPositionSurrounding(read_minimizer_position);
         }
         std::cout << std::endl;
@@ -280,8 +284,8 @@ void Sequence::CompareWithSequence(const Sequence& read) {
   if (quorum > (count_against_reverse_votes + count_for_reverse_votes)) {
     std::cout << "Warning! Did not meet quorum! Reverse the sequence, reduce kmer length or reduce window size." << std::endl;
   }
-  std::cout << "Against reversal: " << count_against_reverse_votes << std::endl;
-  std::cout << "For reversal: " << count_for_reverse_votes << std::endl;
+  std::cout << "Against complementing: " << count_against_reverse_votes << std::endl;
+  std::cout << "For complementing: " << count_for_reverse_votes << std::endl;
 }
 
 void Sequence::PrintPositionSurrounding(const unsigned int& position) const {
