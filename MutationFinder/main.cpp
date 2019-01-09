@@ -61,6 +61,17 @@ int main(void) {
         }
         std::cout << std::endl;
     }
+
+    if (found >= 1) {
+        std::cout << "Mutations = " << found << std::endl;
+        std::list<mutation> mutations = mapper.getMutations(sequence_A, sequence_B);
+        for (auto& mut : mutations) {
+            std::cout << mut.mutation_character << "," << mut.position << "," << mut.nucleobase << std::endl;
+        }
+
+        break;
+    }
+
     std::cout << std::endl;
   }
 

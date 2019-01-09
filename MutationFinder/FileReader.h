@@ -18,7 +18,7 @@ public:
     stream{file_name.GetString()} {
     if (this->IsFail() || this->IsBad()) {
       std::cerr << "R/W or logical error while opening '" << file_name.GetString() << "'." << std::endl;
-      exit(1);
+      //exit(1);
     }
   }
 
