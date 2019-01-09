@@ -277,6 +277,8 @@ std::list<mutation> SequenceMapper::getGlobalMutations(Sequence &sequence_A, Seq
     const CharVector &y = sequence_A.getSequence();
     bool goal_cell_end_relaxation = (flag == 2);
     cell *goal_cell = nullptr;
+    int goal_cost = 1000000;
+    int goal_x{0}, goal_y{0};
 
     for (int i = 1; i <= N; i++) {
         for (int j = 1; j <= M; j++) {
@@ -306,19 +308,25 @@ std::list<mutation> SequenceMapper::getGlobalMutations(Sequence &sequence_A, Seq
 
             if (j == M && goal_cell_end_relaxation) {
                 if (i == 1) {
-                    goal_cell = &c;
-                } else if (c.cost < goal_cell->cost) {
-                    goal_cell = &c;
+                    goal_cost = c.cost;
+                    goal_x = i;
+                    goal_y = j;
+                } else if (c.cost < goal_cost) {
+                    goal_cost = c.cost;
+                    goal_x = i;
+                    goal_y = j;
                 }
+
             }
         }
     }
 
     //std::cout << "m.size = " << m.size() << std::endl;
-
     int i = N, j = M;
     if (goal_cell_end_relaxation == false) {
         goal_cell = &m[std::make_tuple(i, j)];
+    } else {
+        goal_cell = &m[std::make_tuple(goal_x, goal_y)];
     }
     cell *current_cell = goal_cell;
     cell *parrent_cell = nullptr;
@@ -398,7 +406,7 @@ std::list<mutation> SequenceMapper::getMutations(Sequence &sequence_A, Sequence 
     position_A = points[(int)points.size() - 1].x + k - 1;
     position_B = points[(int)points.size() - 1].y + k - 1;
     M = sequence_B.getSequence().Length() - position_B;
-    N = (int)2 * M;
+    N = (int)(2 * M);
     std::list<mutation> mutations_for_fragment = getGlobalMutations(sequence_A, sequence_B,
                         position_A, N, position_B, M, reverse_helix, 2);
 

@@ -27,12 +27,13 @@ int main(void) {
   SequenceMapper mapper{};
   std::map<char, char> reverse_transformer = {{'1', 'A'}, {'2', 'T'}, {'3', 'G'}, {'0', 'C'}};
 
+  std::map<int, std::vector<mutation>> mutation_map{};
+
   for (Sequence& sequence_B : sequences_B) {
     std::cout << sequence_B.getDescription() << std::endl;
     //std::vector<unsigned int> positions = mapper.getMatchingPositions(sequence_A, sequence_B);
-    std::vector<point> points = mapper.getAllMatchingPositions(sequence_A, sequence_B);
-    found += (points.size() > 1) ? 1 : 0;
 
+    /*
     if (points.size() > 1) {
         std::cout << "minimizer_number = " << sequence_B.getMinimizers().size() << std::endl;
         point k_reverse = points[0];
@@ -68,24 +69,23 @@ int main(void) {
             std::cout << std::endl;
         }
     }
+    */
 
-    if (found >= 1) {
+    std::list<mutation> mutations = mapper.getMutations(sequence_A, sequence_B);
 
-        std::cout << "Mutations = " << std::endl;
-        std::list<mutation> mutations = mapper.getMutations(sequence_A, sequence_B);
-
-        for (auto& mut : mutations) {
-            std::cout << mut.mutation_character << "," << mut.position << "," << mut.nucleobase << std::endl;
-        }
-
-        int mut_found = mutations.size();
-        int size_B = sequence_B.getSequence().Length();
-
-        std::cout << std::endl;
-        std::cout << "sequence_size_B = " << size_B << ", mutations_found = " << mut_found << ", mutation_statistic = " <<
-            ((double)mut_found) / size_B << std::endl;
-        break;
+    /*
+    for (auto& mut : mutations) {
+        std::cout << mut.mutation_character << "," << mut.position << "," << mut.nucleobase << std::endl;
     }
+    */
+
+    found += (mutations.size() > 1) ? 1 : 0;
+    int mut_found = mutations.size();
+    int size_B = sequence_B.getSequence().Length();
+
+    std::cout << "found = " << found;
+    std::cout << ", sequence_size_B = " << size_B << ", mutations_found = " << mut_found << ", mutation_statistic = " <<
+        ((double)mut_found) / size_B << std::endl;
 
     std::cout << std::endl;
   }
