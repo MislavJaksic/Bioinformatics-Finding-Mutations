@@ -64,10 +64,27 @@ if __name__ == '__main__':
 
     positions.sort()
 
+    fn = 0
+    fp = 0
+    match = 0
+    total_original = 0
+    total_calculated = 0
     for position in positions:
         if (position in dict1) and (position in dict2):
             print(dict1[position])
+            total_original += 1
+            match += 1
+            total_calculated += 1
         elif (position in dict1):
             print(dict1[position] + "   \t- FN")
+            fn += 1
+            total_original += 1
         elif (position in dict2):
             print(dict2[position] + "   \t+ FP")
+            fp += 1
+            total_calculated += 1
+
+    print("")
+    print("Original mutations count =   " + str(total_original))
+    print("Calculated mutations count = " + str(total_calculated))
+    print("Match = " + str(match) + ", False Positive = " + str(fp) + ", False Negative = " + str(fn))
