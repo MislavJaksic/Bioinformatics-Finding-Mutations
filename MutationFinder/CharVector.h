@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 #include "String.h"
 
@@ -45,6 +46,11 @@ public:
 
   void Shrink();
   void Clear();
+
+  void Reverse();
+  const std::vector<char>& GetVector() const;
+  bool IsEmpty() const;
+  bool IsNotEmpty() const;
 };
 
 #endif // VECTOR_WRAPPER_TEMPLATE

@@ -10,20 +10,26 @@ int main(void) {
 
   file_name = "lambda_simulated_reads.fasta";
   std::vector<Sequence> sequences_B = LoadSequencesFromFile(file_name);
+  int k_len{20}, w_len{40};
 
   sequence_A.Transform();
-  sequence_A.IndexMinimizers(20, 40);
+  sequence_A.IndexMinimizers(k_len, w_len);
   //std::cout << sequence_A << std::endl;
 
+  std::map<char, char> reverse_nucleobase = {{'0', '3'}, {'1', '2'}, {'2', '1'}, {'3', '0'}};
 
-
-  for (auto& element : sequences_B) {
-    element.Transform();
-    element.ExtractMinimizers(20, 40);
-    //std::cout << element << std::endl;
+  for (auto& read : sequences_B) {
+    read.Transform();
+    read.ExtractMinimizers(k_len, w_len);
+    if (sequence_A.IsReverseAlignment(read)) {
+      read.Reverse();
+      //read.Transform(reverse_nucleobase);
+      read.ExtractMinimizers(k_len, w_len);
+    }
   }
 
   int found = 0;
+  //int counter = -1;
   double mut_stat{0.0};
   SequenceMapper mapper{};
   std::map<char, char> reverse_transformer = {{'1', 'A'}, {'2', 'T'}, {'3', 'G'}, {'0', 'C'}};
@@ -31,30 +37,27 @@ int main(void) {
   std::map<unsigned int, std::vector<mutation_count>> mutation_map{};
   std::map<unsigned int, int> count_map{};
 
-  for (Sequence& sequence_B : sequences_B) {
-    std::vector<point> points = mapper.getAllMatchingPositions(sequence_A, sequence_B);
+  //std::cout << "Genome length = " << sequence_A.Length() << std::endl;
 
-    if (points.size() < 2)
-        continue;
-    found++;
+  for (Sequence& sequence_B : sequences_B) {
     /*
-    if (found != 70)
+    counter++;
+    if (counter != 15)
         continue;
     */
+    std::cout << sequence_B.getDescription() << std::endl;
+    std::vector<point> points = mapper.getAllMatchingPositions(sequence_A, sequence_B);
+    //std::cout << "minimizer_number = " << sequence_B.getMinimizers().size() << std::endl;
+    std::cout << "Shared positions = " << ((points.size() <= 1)? 0 : points.size() - 1) << std::endl;
+    if (points.size() < 2)
+        continue;
+
     unsigned int start_A = points[1].x - points[1].y >= 0 ? points[1].x - points[1].y : 0;
     unsigned int end_A = points[points.size() - 1].x + sequence_B.getSequence().Length() - points[points.size() - 1].y - 1;
-    end_A = end_A < sequence_A.getSequence().Length() ? end_A : sequence_B.getSequence().Length() - 1;
-    for (int i = (int)start_A; i <= (int)end_A; i++) {
-        if (count_map.count(i) > 0) {
-            count_map[i] = count_map[i] + 1;
-        } else {
-            count_map.insert( std::pair<unsigned int, int>(i, 1) );
-        }
-    }
+    end_A = end_A < sequence_A.getSequence().Length() ? end_A : sequence_A.getSequence().Length() - 1;
 
     /*
     if (points.size() > 1) {
-        std::cout << "minimizer_number = " << sequence_B.getMinimizers().size() << std::endl;
         point k_reverse = points[0];
         std::cout << "k = " << k_reverse.x << ", Reverse = " << k_reverse.y << std::endl;
 
@@ -89,16 +92,36 @@ int main(void) {
         }
     }
     */
-
     std::list<mutation> mutations = mapper.getMutations(sequence_A, sequence_B);
 
-    std::cout << sequence_B.getDescription() << std::endl;
-    std::cout << "start_A = " << start_A << ", end_A = " << end_A << std::endl;
-    std::cout << "minimizer_number = " << sequence_B.getMinimizers().size() << std::endl;
+    //std::cout << "start_A = " << start_A << ", end_A = " << end_A << std::endl;
+    //std::cout << "minimizer_number = " << sequence_B.getMinimizers().size() << std::endl;
 
     int size_B = sequence_B.getSequence().Length();
     std::cout << "found = " << found << ", sequence_size_B = " << size_B ;
 
+    int mut_found = mutations.size();
+
+    std::cout << ", mutations_found = " << mut_found << ", mutation_statistic = " <<
+        ((double)mut_found) / size_B << std::endl;
+
+    double mut_stat_seq = ((double)mut_found) / size_B;
+
+    if (mut_stat_seq > 0.25) {
+        std::cout << "Overly big mutation, this read will be dissmissed!" << std::endl << std::endl;
+        continue;
+    }
+
+    found++;
+    mut_stat += mut_stat_seq;
+
+    for (int i = (int)start_A; i <= (int)end_A; i++) {
+        if (count_map.count(i) > 0) {
+            count_map[i] = count_map[i] + 1;
+        } else {
+            count_map.insert( std::pair<unsigned int, int>(i, 1) );
+        }
+    }
 
     for (auto& mut : mutations) {
         //std::cout << mut.mutation_character << "," << mut.position << "," << mut.nucleobase << std::endl;
@@ -122,19 +145,13 @@ int main(void) {
         }
     }
 
-    int mut_found = mutations.size();
-
-    std::cout << ", mutations_found = " << mut_found << ", mutation_statistic = " <<
-        ((double)mut_found) / size_B << std::endl;
-
-    mut_stat += ((double)mut_found) / size_B;
     std::cout << std::endl;
-
     //return 0;
   }
 
+  std::cout << "Found = " << found << ", out of: " << sequences_B.size() << std::endl;
+
   mut_stat = mut_stat / found;
-  std::cout << "Found " << found << ", out of: " << sequences_B.size() << std::endl;
   std::cout << "Mutation statistic average = " << mut_stat << std::endl;
 
   std::vector<mutation_count> mut_vector{};
@@ -167,10 +184,16 @@ int main(void) {
     }
   }
 
+  std::ofstream myfile;
+  myfile.open ("out.csv", std::ios::out | std::ios::binary);
+
   for (mutation_count& mut_count : mut_vector) {
       std::cout << mut_count.mut.mutation_character << "," << mut_count.mut.position << "," << mut_count.mut.nucleobase <<
-        "; number = " << mut_count.number << std::endl;
+        "   \t number = " << mut_count.number << std::endl;
+
+    myfile << mut_count.mut.mutation_character << "," << mut_count.mut.position << "," << mut_count.mut.nucleobase << std::endl;
   }
 
+  myfile.close();
   return 0;
 }

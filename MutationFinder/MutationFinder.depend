@@ -230,16 +230,17 @@
 1546248589 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmer.cpp
 	"Kmer.h"
 
-1546437812 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\charvector.cpp
+1547121304 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\charvector.cpp
 	"CharVector.h"
 
-1546437812 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\charvector.h
+1547121405 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\charvector.h
 	<iostream>
 	<vector>
 	<map>
+	<algorithm>
 	"String.h"
 
-1546941115 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\string.h
+1547119329 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\string.h
 	<iostream>
 	<string>
 
@@ -253,23 +254,23 @@
 	"Sequence.h"
 	"String.h"
 
-1546941794 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\filereader.h
+1547119354 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\filereader.h
 	<iostream>
 	<fstream>
 	"String.h"
 	<cstdlib>
 
-1546941115 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequence.h
+1547120734 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequence.h
 	<map>
 	"CharVector.h"
 	"KmerTriple.h"
 	"KmerIndex.h"
 
-1546437812 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmertriple.h
+1547121754 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmertriple.h
 	<iostream>
 	"KmerKey.h"
 
-1546941115 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmerkey.h
+1547121593 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmerkey.h
 	<iostream>
 	"Kmer.h"
 
@@ -287,13 +288,13 @@
 1546437812 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmer.cpp
 	"Kmer.h"
 
-1546941115 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmerindex.cpp
+1547119329 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmerindex.cpp
 	"KmerIndex.h"
 
-1546941115 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmerkey.cpp
+1547121646 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmerkey.cpp
 	"KmerKey.h"
 
-1546437812 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmertriple.cpp
+1547121790 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\kmertriple.cpp
 	"KmerTriple.h"
 
 1546437812 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\map.cpp
@@ -302,16 +303,16 @@
 1546437812 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\map.h
 	<map>
 
-1546941115 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequence.cpp
+1547122099 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequence.cpp
 	"Sequence.h"
 
-1546941115 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\string.cpp
+1547119329 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\string.cpp
 	"String.h"
 
-1547072800 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\main.cpp
+1547136016 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\main.cpp
 	"main.h"
 
-1546941117 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\main.h
+1547136034 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\main.h
 	<iostream>
 	<vector>
 	<chrono>
@@ -320,7 +321,7 @@
 	"Sequence.h"
 	"SequenceMapper.h"
 
-1547068118 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequencemapper.h
+1547119354 c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequencemapper.h
 	<iostream>
 	<cstdlib>
 	<cstddef>
@@ -328,6 +329,6 @@
 	<list>
 	"Sequence.h"
 
-1547066583 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequencemapper.cpp
+1547135038 source:c:\users\josip kasap\documents\github\bioinformatics-finding-mutations\mutationfinder\sequencemapper.cpp
 	"SequenceMapper.h"
 

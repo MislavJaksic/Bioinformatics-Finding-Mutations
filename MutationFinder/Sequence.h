@@ -65,6 +65,15 @@ public:
 
   const String& getDescription();
   const CharVector& getSequence();
+
+
+  unsigned int Length() const;
+  void Transform(const std::map<char,char> char_pairs);
+  void Reverse();
+  bool IsReverseAlignment(const Sequence& read);
+  void CompareWithSequence(const Sequence& read);
+  void PrintPositionSurrounding(const unsigned int& position) const;
+  void PrintFromTo(const unsigned int& from, const unsigned int& to) const;
 };
 
 //Header guard end

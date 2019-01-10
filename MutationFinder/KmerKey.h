@@ -24,10 +24,12 @@ public:
   }
 
   friend std::ostream& operator<< (std::ostream &out, const KmerKey &key); //for printing
+  friend bool operator== (const KmerKey &key_A, const KmerKey &key_B);
   friend bool operator< (const KmerKey &key_A, const KmerKey &key_B);
 
-  Kmer getKmer() const;
-  bool isOnReverseHelix();
+  const Kmer& GetKmer() const;
+  const bool& GetIsReverse() const;
+  //bool isOnReverseHelix();
 };
 
 #endif

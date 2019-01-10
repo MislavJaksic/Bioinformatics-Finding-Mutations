@@ -33,13 +33,13 @@ std::vector<unsigned int> SequenceMapper::getMatchingPositions(Sequence &sequenc
   std::vector<unsigned int> positions{};
 
   for (const KmerTriple& kmer_triple : sequence_B.getMinimizers()) {
-        int k = kmer_triple.GetKey().getKmer().Length();
-        bool is_on_reverse_helix = kmer_triple.GetKey().isOnReverseHelix();
+        int k = kmer_triple.GetKey().GetKmer().Length();
+        bool is_on_reverse_helix = kmer_triple.GetKey().GetIsReverse();
         unsigned int position_B = kmer_triple.GetPosition();
         //std::map<char, char> reverse_nucleobase = {{'0', '3'}, {'1', '2'}, {'2', '1'}, {'3', '0'}};
 
-        KmerKey key_true{kmer_triple.GetKey().getKmer(), false};
-        KmerKey key_reverse{kmer_triple.GetKey().getKmer(), true};
+        KmerKey key_true{kmer_triple.GetKey().GetKmer(), false};
+        KmerKey key_reverse{kmer_triple.GetKey().GetKmer(), true};
         std::vector<unsigned int> positions_true = sequence_A.minimizer_index[key_true];
         std::vector<unsigned int> positions_reverse = sequence_A.minimizer_index[key_reverse];
         bool is_found_true = positions_true.size() >= 1;
@@ -128,30 +128,30 @@ std::vector<point> SequenceMapper::getAllMatchingPositions(Sequence &sequence_A,
 
   bool added_k_and_reverse = false;
   int pos_a = -1000, pos_b = -1000;
+  bool reverse_helix = false;
 
   for (const KmerTriple& kmer_triple : sequence_B.getMinimizers()) {
-        unsigned int k = kmer_triple.GetKey().getKmer().Length();
-        bool is_on_reverse_helix = kmer_triple.GetKey().isOnReverseHelix();
+        unsigned int k = kmer_triple.GetKey().GetKmer().Length();
+        bool is_on_reverse_helix = kmer_triple.GetKey().GetIsReverse();
         unsigned int position_B = kmer_triple.GetPosition();
-
         //std::map<char, char> reverse_nucleobase = {{'0', '3'}, {'1', '2'}, {'2', '1'}, {'3', '0'}};
 
-        KmerKey key_true{kmer_triple.GetKey().getKmer(), false};
-        KmerKey key_reverse{kmer_triple.GetKey().getKmer(), true};
+        KmerKey key_true{kmer_triple.GetKey().GetKmer(), false};
+        KmerKey key_reverse{kmer_triple.GetKey().GetKmer(), true};
         std::vector<unsigned int> positions_true = sequence_A.minimizer_index[key_true];
         std::vector<unsigned int> positions_reverse = sequence_A.minimizer_index[key_reverse];
         bool is_found_true = positions_true.size() >= 1;
         bool is_found_reverse = positions_reverse.size() >= 1;
 
         if ((is_found_true || is_found_reverse) && added_k_and_reverse == false) {
-            bool reverse_helix = !(is_found_reverse == is_on_reverse_helix);
+            reverse_helix = !(is_found_reverse == is_on_reverse_helix);
             unsigned int reverse_hel = reverse_helix == true ? 1 : 0;
             added_k_and_reverse = true;
             point p{k, reverse_hel};
             points.push_back(p);
         }
 
-        if (is_found_true) {
+        if (is_found_true || is_found_reverse) {
             for (auto& position_A : positions_true) {
                 int true_position = position_A;
 
@@ -172,9 +172,16 @@ std::vector<point> SequenceMapper::getAllMatchingPositions(Sequence &sequence_A,
                     if (pos_A_check < 0 || pos_B_check < 0)
                         continue;
 
-                    if (sequence_A.getSequence()[pos_A_check] != sequence_B.getSequence()[pos_B_check]) {
-                        true_position = -1;
-                        break;
+                    if (reverse_helix) {
+                        if (sequence_A.getSequence()[pos_A_check] != SequenceMapper::reverse_transformation[sequence_B.getSequence()[pos_B_check]]) {
+                            true_position = -1;
+                            break;
+                        }
+                    } else {
+                        if (sequence_A.getSequence()[pos_A_check] != sequence_B.getSequence()[pos_B_check]) {
+                            true_position = -1;
+                            break;
+                        }
                     }
 
                     pos_A_check = position_A + k + i;
@@ -182,52 +189,16 @@ std::vector<point> SequenceMapper::getAllMatchingPositions(Sequence &sequence_A,
                     if (pos_A_check >= (int)sequence_A.getSequence().Length() || pos_B_check >= (int)sequence_B.getSequence().Length())
                         continue;
 
-                    if (sequence_A.getSequence()[pos_A_check] != sequence_B.getSequence()[pos_B_check]) {
-                        true_position = -1;
-                        break;
-                    }
-                 }
-
-                 if (true_position > -1) {
-                    point p{position_A, position_B};
-                    points.push_back(p);
-                 }
-            }
-        }
-        if (is_found_reverse) {
-            for (auto& position_A : positions_true) {
-                int true_position = position_A;
-
-                if (pos_a >= (int)position_A || -pos_a + (int)position_A <  100) {
-                    continue;
-                } else {
-                    pos_a = (int)position_A;
-                }
-                if (pos_b >= (int)position_B || -pos_b + (int)position_A <  100) {
-                    continue;
-                } else {
-                    pos_b = (int)position_B;
-                }
-
-                 for (int i=1; i<=5; i++) {
-                    int pos_A_check = position_A - i;
-                    int pos_B_check = position_B - i;
-                    if (pos_A_check < 0 || pos_B_check < 0)
-                        continue;
-
-                    if (reverse_nucleobase[sequence_A.getSequence()[pos_A_check]] != sequence_B.getSequence()[pos_B_check]) {
-                        true_position = -1;
-                        break;
-                    }
-
-                    pos_A_check = position_A + k + i;
-                    pos_B_check = position_B + k + i;
-                    if (pos_A_check >= (int)sequence_A.getSequence().Length() || pos_B_check >= (int)sequence_B.getSequence().Length())
-                        continue;
-
-                    if (reverse_nucleobase[sequence_A.getSequence()[pos_A_check]] != sequence_B.getSequence()[pos_B_check]) {
-                        true_position = -1;
-                        break;
+                    if (reverse_helix) {
+                        if (sequence_A.getSequence()[pos_A_check] != SequenceMapper::reverse_transformation[sequence_B.getSequence()[pos_B_check]]) {
+                            true_position = -1;
+                            break;
+                        }
+                    } else {
+                        if (sequence_A.getSequence()[pos_A_check] != sequence_B.getSequence()[pos_B_check]) {
+                            true_position = -1;
+                            break;
+                        }
                     }
                  }
 
@@ -295,11 +266,23 @@ std::list<mutation> SequenceMapper::getGlobalMutations(Sequence &sequence_A, Seq
             std::tuple<int, int> m_position_match = std::make_tuple(i-1, j-1);
             std::tuple<int, int> m_position_insert = std::make_tuple(i, j-1);
             std::tuple<int, int> m_position_delete = std::make_tuple(i-1, j);
+
             if (flag != 0) {
-                opt = m[m_position_match].cost + SequenceMapper::pam[std::make_tuple(x[position_B + j-1], y[position_A + i-1])];
+                if (reverse_helix) {
+                    opt = m[m_position_match].cost + SequenceMapper::pam[
+                        std::make_tuple(SequenceMapper::reverse_transformation[x[position_B + j-1]], y[position_A + i-1])];
+                } else {
+                    opt = m[m_position_match].cost + SequenceMapper::pam[std::make_tuple(x[position_B + j-1], y[position_A + i-1])];
+                }
             } else {
-                opt = m[m_position_match].cost + SequenceMapper::pam[std::make_tuple(x[position_B - (j-1)], y[position_A - (i-1)])];
+                if (reverse_helix) {
+                    opt = m[m_position_match].cost + SequenceMapper::pam[
+                        std::make_tuple(SequenceMapper::reverse_transformation[x[position_B - (j-1)]], y[position_A - (i-1)])];
+                } else {
+                    opt = m[m_position_match].cost + SequenceMapper::pam[std::make_tuple(x[position_B - (j-1)], y[position_A - (i-1)])];
+                }
             }
+
             best_parrent = &m_position_match;
 
             if (j > i-kN) {
@@ -371,14 +354,36 @@ std::list<mutation> SequenceMapper::getGlobalMutations(Sequence &sequence_A, Seq
         }
 
         if (i - current_cell->parrent_x == 1 && j - current_cell->parrent_y == 1) {
-            mutation mutt{'X', pos_a, reverse_nucleobase[x[pos_b]]};
-            mutations.push_front(mutt);
+            if (reverse_helix) {
+                mutation mutt{'X', pos_a, reverse_nucleobase[SequenceMapper::reverse_transformation[x[pos_b]]]};
+                if (flag != 0)
+                    mutations.push_front(mutt);
+                else
+                    mutations.push_back(mutt);
+            } else {
+                mutation mutt{'X', pos_a, reverse_nucleobase[x[pos_b]]};
+                if (flag != 0)
+                    mutations.push_front(mutt);
+                else
+                    mutations.push_back(mutt);
+            }
         } else if (i - current_cell->parrent_x == 1 && j - current_cell->parrent_y == 0) {
             mutation mutt{'D', pos_a, '-'};
             mutations.push_front(mutt);
         } else if (i - current_cell->parrent_x == 0 && j - current_cell->parrent_y == 1) {
-            mutation mutt{'I', pos_a, reverse_nucleobase[x[pos_b]]};
-            mutations.push_front(mutt);
+             if (reverse_helix) {
+                mutation mutt{'I', pos_a + 1, reverse_nucleobase[SequenceMapper::reverse_transformation[x[pos_b]]]};
+                if (flag != 0)
+                    mutations.push_front(mutt);
+                else
+                    mutations.push_back(mutt);
+            } else {
+                mutation mutt{'I', pos_a + 1, reverse_nucleobase[x[pos_b]]};
+                if (flag != 0)
+                    mutations.push_front(mutt);
+                else
+                    mutations.push_back(mutt);
+            }
         }
 
         i = current_cell->parrent_x;
