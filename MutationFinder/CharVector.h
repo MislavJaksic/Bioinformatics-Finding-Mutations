@@ -42,14 +42,17 @@ public:
   void Append(const char &character);
   void Append(const String &string);
 
-  void Transform(std::map<char, char> &map);
+  void Transform(std::map<char, char> map);
   void Reverse();
 
   unsigned int Length() const;
+
+  bool IsEmpty() const;
+  bool IsNotEmpty() const;
 
   void Shrink();
   void Clear();
 };
 
-#endif // VECTOR_WRAPPER_TEMPLATE
+#endif
 

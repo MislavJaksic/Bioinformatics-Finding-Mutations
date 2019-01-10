@@ -6,6 +6,7 @@
 #include <map>
 #include <algorithm>
 
+#include "String.h"
 #include "CharVector.h"
 #include "KmerTriple.h"
 #include "KmerIndex.h"
@@ -17,7 +18,6 @@ private:
   CharVector sequence;
 
   static unsigned int max_print;
-  static std::map<char, char> transformer;
   static std::map<char, char> reverse_nucleobase;
 
 public:
@@ -47,7 +47,7 @@ public:
   const String& GetDescription() const;
   const CharVector& GetSequence() const;
 
-  void Transform();
+  void Transform(const std::map<char,char> char_pairs);
   void Reverse();
 
   void ExtractMinimizers(unsigned int kmer_length, unsigned int window_length);

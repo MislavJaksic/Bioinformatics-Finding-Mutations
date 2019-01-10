@@ -9,9 +9,8 @@
 #include <chrono>
 #include <thread>
 
-#include "CLI11.hpp"
-
 #include "file_functions.h"
+#include "settings_functions.h"
 #include "Sequence.h"
 
 //Header guard end

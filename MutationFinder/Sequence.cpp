@@ -3,7 +3,6 @@
 
 
 unsigned int Sequence::max_print{20};
-std::map<char, char> Sequence::transformer = {{'A', '1'}, {'T', '2'}, {'G', '3'}, {'C', '0'}};
 std::map<char, char> Sequence::reverse_nucleobase = {{'0', '3'}, {'1', '2'}, {'2', '1'}, {'3', '0'}};
 
 
@@ -47,8 +46,8 @@ const CharVector& Sequence::GetSequence() const {
 
 
 
-void Sequence::Transform() {
-  this->sequence.Transform(this->transformer);
+void Sequence::Transform(std::map<char,char> char_pairs) {
+  this->sequence.Transform(char_pairs);
 }
 
 void Sequence::Reverse() {
@@ -217,8 +216,8 @@ bool Sequence::IsReverseAlignment(const Sequence& read) {
 
 void Sequence::CompareWithSequence(const Sequence& read) {
   unsigned int minimizer_print_count{0};
-  unsigned int max_minimizer_print{this->max_print/20};
-  unsigned int quorum{this->max_print/2};
+  unsigned int max_minimizer_print{this->max_print / 20};
+  unsigned int quorum{this->max_print / 2};
 
   unsigned int count_against_reverse_votes{0};
   unsigned int count_for_reverse_votes{0};
