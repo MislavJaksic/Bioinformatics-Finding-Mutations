@@ -35,8 +35,6 @@ bool operator< (const KmerKey &key_A, const KmerKey &key_B) {
   }
 }
 
-
-
 const Kmer& KmerKey::GetKmer() const {
   return this->kmer;
 }

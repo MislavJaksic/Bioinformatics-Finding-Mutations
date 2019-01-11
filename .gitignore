@@ -34,6 +34,6 @@
 
 
 # Files too big to be commited to GitHub (over 100MB)
-TestData/ecoli_simulated_reads.fasta 
+TestData/ecoli_simulated_reads.fasta
 MutationFinder/ecoli_simulated_reads.fasta
 Docs/FindingMinimizers.md

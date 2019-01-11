@@ -52,6 +52,11 @@ public:
 
   void Shrink();
   void Clear();
+
+  void Reverse();
+  const std::vector<char>& GetVector() const;
+  bool IsEmpty() const;
+  bool IsNotEmpty() const;
 };
 
 #endif

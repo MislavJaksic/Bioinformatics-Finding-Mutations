@@ -12,6 +12,7 @@
 #include "file_functions.h"
 #include "settings_functions.h"
 #include "Sequence.h"
+#include "SequenceMapper.h"
 
 //Header guard end
 #endif

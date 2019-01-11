@@ -6,6 +6,7 @@
 #include <fstream>
 
 #include "String.h"
+#include <cstdlib>
 
 //Declarations
 class FileReader {

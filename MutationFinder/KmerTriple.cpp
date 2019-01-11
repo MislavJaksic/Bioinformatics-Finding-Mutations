@@ -26,8 +26,6 @@ bool operator< (const KmerTriple &triple_A, const KmerTriple &triple_B) {
   }
 }
 
-
-
 const KmerKey& KmerTriple::GetKey() const {
   return this->key;
 }
