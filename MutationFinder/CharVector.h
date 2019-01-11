@@ -37,12 +37,18 @@ public:
   std::vector<char>::iterator begin();
   std::vector<char>::iterator end();
 
+  const std::vector<char>& GetVector() const;
+
   void Append(const char &character);
   void Append(const String &string);
 
-  void Transform(std::map<char, char> &map);
+  void Transform(std::map<char, char> map);
+  void Reverse();
 
   unsigned int Length() const;
+
+  bool IsEmpty() const;
+  bool IsNotEmpty() const;
 
   void Shrink();
   void Clear();
@@ -53,5 +59,5 @@ public:
   bool IsNotEmpty() const;
 };
 
-#endif // VECTOR_WRAPPER_TEMPLATE
+#endif
 

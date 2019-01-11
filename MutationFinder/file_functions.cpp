@@ -11,13 +11,14 @@ std::vector<Sequence> LoadSequencesFromFile(String &file_name) {
   return sequences;
 }
 
+
+
 std::vector<Sequence> ReadFasta(FileReader &reader) {
   std::vector<Sequence> sequences;
 
   String fasta_description;
   CharVector fasta_sequence;
 
-  bool is_sequence_not_empty = false;
   String line;
 
   while (reader.IsFlagsUnset()) {
@@ -27,19 +28,18 @@ std::vector<Sequence> ReadFasta(FileReader &reader) {
     }
 
     if (line.IsCharAt('>', 0)) {
-      if (is_sequence_not_empty) {
+      if (fasta_sequence.IsNotEmpty()) {
         Sequence sequence{fasta_description, fasta_sequence};
         sequences.push_back(sequence);
 
         fasta_description.Clear();
         fasta_sequence.Clear();
-        is_sequence_not_empty = false;
       }
+
       fasta_description = line;
 
     } else {
       fasta_sequence.Append(line);
-      is_sequence_not_empty = true;
     }
   }
 

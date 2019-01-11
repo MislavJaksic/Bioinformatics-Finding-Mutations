@@ -42,9 +42,3 @@ const Kmer& KmerKey::GetKmer() const {
 const bool& KmerKey::GetIsReverse() const {
   return this->is_on_reverse_helix;
 }
-
-/*
-bool KmerKey::isOnReverseHelix() {
-  return this->is_on_reverse_helix;
-}
-*/

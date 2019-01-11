@@ -45,6 +45,20 @@ void FileReader::ResetFlags() {
 
 
 
+void FileReader::HandleFailError(const String &file_name) {
+  if (this->IsFail()) {
+    std::cerr << "Read/write error while opening '" << file_name.GetString() << "'." << std::endl;
+    this->Close();
+  }
+}
+
+void FileReader::HandleBadError(const String &file_name) {
+  if (this->IsBad()) {
+    std::cerr << "Logical error while opening '" << file_name.GetString() << "'." << std::endl;
+    this->Close();
+  }
+}
+
 void FileReader::Close() {
   this->stream.close();
 }

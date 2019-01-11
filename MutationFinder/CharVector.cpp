@@ -79,6 +79,12 @@ std::vector<char>::iterator CharVector::end() {
 
 
 
+const std::vector<char>& CharVector::GetVector() const {
+  return this->resizeable_array;
+}
+
+
+
 void CharVector::Append(const char &character) {
   this->resizeable_array.push_back(character);
 }
@@ -91,7 +97,7 @@ void CharVector::Append(const String &string) {
 
 
 
-void CharVector::Transform(std::map<char, char> &map) {
+void CharVector::Transform(std::map<char, char> map) {
   char character;
   for (unsigned int i = 0; i < this->Length(); i++) {
     character = this->resizeable_array[i];
@@ -101,10 +107,30 @@ void CharVector::Transform(std::map<char, char> &map) {
   }
 }
 
+void CharVector::Reverse() {
+  std::reverse(this->begin(), this->end());
+}
+
 
 
 unsigned int CharVector::Length() const {
   return this->resizeable_array.size();
+}
+
+
+
+bool CharVector::IsEmpty() const {
+  if (this->Length() < 1) {
+    return true;
+  }
+  return false;
+}
+
+bool CharVector::IsNotEmpty() const {
+  if (this->IsEmpty()) {
+    return false;
+  }
+  return true;
 }
 
 

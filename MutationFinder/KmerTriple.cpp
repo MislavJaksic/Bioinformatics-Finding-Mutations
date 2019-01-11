@@ -43,13 +43,3 @@ const bool& KmerTriple::GetIsReverse() const {
 const unsigned int& KmerTriple::GetPosition() const {
   return this->position;
 }
-
-/*
-KmerKey KmerTriple::GetKey() const {
-  return this->key;
-}
-
-unsigned int KmerTriple::GetPosition() const {
-  return this->position;
-}
-*/

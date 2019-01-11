@@ -29,7 +29,6 @@ public:
 
   const Kmer& GetKmer() const;
   const bool& GetIsReverse() const;
-  //bool isOnReverseHelix();
 };
 
 #endif

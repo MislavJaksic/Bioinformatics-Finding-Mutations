@@ -41,7 +41,7 @@ Property 1: if two strings Ti and Tj have a significant exact match, then AT LEA
 You must choose a k-mer ordering such as numerical/lexicographic ordering.  
 
 **Window size** w is the number of consecutive k-mers.  
-w k-mers cover a string of w + k -1 characters.  
+w k-mers cover a string of w + k - 1 characters.  
 Find a minimizer by examining w and select the smallest k-mer (based on chosen ordering).  
 In case of a tie, each of the smallest k-mers is a minimizers.  
 

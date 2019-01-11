@@ -3,7 +3,6 @@
 
 
 unsigned int Sequence::max_print{20};
-std::map<char, char> Sequence::transformer = {{'A', '1'}, {'T', '2'}, {'G', '3'}, {'C', '0'}};
 std::map<char, char> Sequence::reverse_nucleobase = {{'0', '3'}, {'1', '2'}, {'2', '1'}, {'3', '0'}};
 
 
@@ -27,6 +26,7 @@ std::ostream& operator<< (std::ostream &out, const Sequence &sequence) {
     }
     out << ",";
   }
+  out << "]";
   out << std::endl;
 
   out << "Index:" << sequence.minimizer_index << std::endl;
@@ -36,13 +36,28 @@ std::ostream& operator<< (std::ostream &out, const Sequence &sequence) {
 
 
 
-void Sequence::Transform() {
-  this->sequence.Transform(this->transformer);
+const String& Sequence::GetDescription() const {
+  return this->description;
+}
+
+const CharVector& Sequence::GetSequence() const {
+  return this->sequence;
+}
+
+
+
+void Sequence::Transform(std::map<char,char> char_pairs) {
+  this->sequence.Transform(char_pairs);
+}
+
+void Sequence::Reverse() {
+  this->sequence.Reverse();
 }
 
 
 
 void Sequence::ExtractMinimizers(unsigned int kmer_length, unsigned int window_length) {
+  this->ClearMinimizers();
   unsigned int window_position = 0;
   unsigned int max_window = this->sequence.Length() - window_length + 1;
 
@@ -63,9 +78,11 @@ void Sequence::ExtractMinimizers(unsigned int kmer_length, unsigned int window_l
   }
 
   this->Shrink();
+  this->SortMinimizers();
 }
 
 void Sequence::IndexMinimizers(unsigned int kmer_length, unsigned int window_length) {
+  this->ClearIndex();
   this->ExtractMinimizers(kmer_length, window_length);
 
   KmerTriple triple;
@@ -150,7 +167,173 @@ void Sequence::AppendMinimizer(unsigned int position, unsigned int length, bool 
   minimizers.push_back(triple);
 }
 
+void Sequence::SortMinimizers() {
+  std::sort(this->minimizers.begin(), this->minimizers.end());
+}
 
+
+
+bool Sequence::IsReverseAlignment(const Sequence& read) {
+  unsigned int alignment_threshold{2};
+
+  unsigned int count_against_reverse_votes{0};
+  unsigned int count_for_reverse_votes{0};
+
+  for (auto& read_minimizer : read.minimizers) {
+    bool is_read_minimizer_on_reverse{read_minimizer.GetKey().GetIsReverse()};
+
+    bool is_not_reverse_in_index{false};
+    bool is_reverse_in_index{true};
+
+    KmerKey true_key{read_minimizer.GetKmer(), is_not_reverse_in_index};
+    KmerKey reverse_key{read_minimizer.GetKmer(), is_reverse_in_index};
+
+    std::vector<unsigned int> true_positions{this->minimizer_index[true_key]};
+    std::vector<unsigned int> reverse_positions{this->minimizer_index[reverse_key]};
+
+    if (true_positions.size() > 0) {
+      bool is_read_reverse{is_read_minimizer_on_reverse == is_reverse_in_index};
+      if (is_read_reverse == 0) {
+        count_against_reverse_votes++;
+      } else {
+        count_for_reverse_votes++;
+      }
+    } else if (reverse_positions.size() > 0) {
+      bool is_read_reverse{is_read_minimizer_on_reverse == is_not_reverse_in_index};
+      if (is_read_reverse == 0) {
+        count_against_reverse_votes++;
+      } else {
+        count_for_reverse_votes++;
+      }
+    }
+  }
+
+  if (alignment_threshold > (count_against_reverse_votes + count_for_reverse_votes)) {
+    return true;
+  }
+  return false;
+}
+
+void Sequence::CompareWithSequence(const Sequence& read) {
+  unsigned int minimizer_print_count{0};
+  unsigned int max_minimizer_print{this->max_print / 20};
+  unsigned int quorum{this->max_print / 2};
+
+  unsigned int count_against_reverse_votes{0};
+  unsigned int count_for_reverse_votes{0};
+
+  std::cout << read.GetDescription() << std::endl;
+  for (auto& read_minimizer : read.minimizers) {
+    unsigned int read_minimizer_position{read_minimizer.GetPosition()};
+    bool is_read_minimizer_on_reverse{read_minimizer.GetKey().GetIsReverse()};
+
+    bool is_not_reverse_in_index{false};
+    bool is_reverse_in_index{true};
+
+    KmerKey true_key{read_minimizer.GetKmer(), is_not_reverse_in_index};
+    KmerKey reverse_key{read_minimizer.GetKmer(), is_reverse_in_index};
+
+    std::vector<unsigned int> true_positions{this->minimizer_index[true_key]};
+    std::vector<unsigned int> reverse_positions{this->minimizer_index[reverse_key]};
+
+    if (true_positions.size() > 0) {
+      bool is_read_reverse{is_read_minimizer_on_reverse == is_reverse_in_index};
+      if (is_read_reverse == 0) {
+        count_against_reverse_votes++;
+      } else {
+        count_for_reverse_votes++;
+      }
+
+      if (minimizer_print_count < max_minimizer_print) {
+        std::cout << "Key: " << true_key << std::endl;
+        std::cout << "Complement read? " << is_read_reverse << std::endl;
+
+        for (auto& reference_position : true_positions) {
+          std::cout << "Refe: ";
+          this->PrintPositionSurrounding(reference_position);
+          std::cout << "Read: ";
+          read.PrintPositionSurrounding(read_minimizer_position);
+        }
+        std::cout << std::endl;
+        minimizer_print_count++;
+      }
+    } else if (reverse_positions.size() > 0) {
+      bool is_read_reverse{is_read_minimizer_on_reverse == is_not_reverse_in_index};
+      if (is_read_reverse == 0) {
+        count_against_reverse_votes++;
+      } else {
+        count_for_reverse_votes++;
+      }
+      if (minimizer_print_count < max_minimizer_print) {
+        std::cout << "Key: " << reverse_key << std::endl;
+        std::cout << "Complement read: " << is_read_reverse << std::endl;
+
+        for (auto& reference_position : reverse_positions) {
+          std::cout << "Refe: ";
+          this->PrintPositionSurrounding(reference_position);
+          std::cout << "Read: ";
+          read.PrintPositionSurrounding(read_minimizer_position);
+        }
+        std::cout << std::endl;
+        minimizer_print_count++;
+      }
+    }
+  }
+
+  if (quorum > (count_against_reverse_votes + count_for_reverse_votes)) {
+    std::cout << "Warning! Did not meet quorum! Reverse the sequence, reduce kmer length or reduce window size." << std::endl;
+  }
+  std::cout << "Against complementing: " << count_against_reverse_votes << std::endl;
+  std::cout << "For complementing: " << count_for_reverse_votes << std::endl;
+}
+
+void Sequence::PrintPositionSurrounding(const unsigned int& position) const {
+  this->PrintFromTo(position - this->max_print, position);
+  std::cout << this->sequence[position] << " ";
+  this->PrintFromTo(position + 1, position + this->max_print);
+  std::cout << std::endl;
+}
+
+void Sequence::PrintFromTo(const unsigned int& from, const unsigned int& to) const {
+  unsigned int begin{from};
+  unsigned int end;
+  if (to > this->Length()) {
+    end = this->Length();
+  } else {
+    end = to;
+  }
+  unsigned int count{1};
+  for (unsigned int i = begin; i < end; i++) {
+    std::cout << this->sequence[i];
+    if (count % 5 == 0) {
+      std::cout << " ";
+    }
+    count++;
+  }
+}
+
+
+
+unsigned int Sequence::Length() const {
+  return this->sequence.Length();
+}
+
+
+
+void Sequence::Shrink() {
+  this->description.Shrink();
+  this->sequence.Shrink();
+  this->minimizers.shrink_to_fit();
+  this->minimizer_index.Shrink();
+}
+
+void Sequence::ClearMinimizers() {
+  this->minimizers.clear();
+}
+
+void Sequence::ClearIndex() {
+  this->minimizer_index.Clear();
+}
 
 void Sequence::Shrink() {
   this->description.Shrink();

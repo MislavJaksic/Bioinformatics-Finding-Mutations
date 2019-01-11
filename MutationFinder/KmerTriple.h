@@ -25,15 +25,12 @@ public:
 
   friend std::ostream& operator<< (std::ostream &out, const KmerTriple &triple);
   friend bool operator< (const KmerTriple &triple_A, const KmerTriple &triple_B);
-
-
+  
   const KmerKey& GetKey() const;
   const Kmer& GetKmer() const;
   const bool& GetIsReverse() const;
 
   const unsigned int& GetPosition() const;
-  //KmerKey GetKey() const;
-  //unsigned int GetPosition() const;
 };
 
 #endif

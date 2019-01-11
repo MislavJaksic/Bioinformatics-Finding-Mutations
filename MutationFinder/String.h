@@ -37,6 +37,9 @@ public:
 
   unsigned int Length() const;
 
+  unsigned int SubstringPosition(const std::string& str);
+  unsigned int SubstringPosition(const char* s) const;
+
   bool IsCharAt(const char character, const unsigned int index);
   bool IsEmpty();
   bool IsNotEmpty();
