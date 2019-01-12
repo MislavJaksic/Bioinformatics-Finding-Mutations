@@ -29,14 +29,15 @@ public:
     this->Clear();
   }
 
-  char& operator[](const unsigned int index);
-  const char& operator[](const unsigned int index) const;
+  char& operator[](const unsigned int &index);
+  const char& operator[](const unsigned int &index) const;
   friend std::ostream& operator<< (std::ostream &out, const CharVector &vector); //for printing
   friend bool operator== (const CharVector &vector_A, const CharVector &vector_B); //for map, for composite key
   friend bool operator< (const CharVector &vector_A, const CharVector &vector_B); //for map
   std::vector<char>::iterator begin();
   std::vector<char>::iterator end();
 
+  std::vector<char>& GetVector();
   const std::vector<char>& GetVector() const;
 
   void Append(const char &character);
@@ -52,11 +53,6 @@ public:
 
   void Shrink();
   void Clear();
-
-  void Reverse();
-  const std::vector<char>& GetVector() const;
-  bool IsEmpty() const;
-  bool IsNotEmpty() const;
 };
 
 #endif

@@ -53,9 +53,9 @@ public:
 
   std::list<mutation> getMutations(Sequence &sequence_A, Sequence &sequence_B);
   std::list<mutation> getGlobalMutations(Sequence &sequence_A, Sequence &sequence_B, int position_A,
-                            int N, int position_B, int M, bool reverse_helix, int flag);
+                                         int N, int position_B, int M, bool reverse_helix, int flag);
   std::list<mutation> getGlobalMutationsReducedSearch(Sequence &sequence_A, Sequence &sequence_B, int position_A,
-                            int N, int position_B, int M, bool reverse_helix);
+      int N, int position_B, int M, bool reverse_helix);
 
 
   //static std::map<std::tuple<char, char>, int> initPam();

@@ -6,11 +6,11 @@ unsigned int CharVector::max_print = {20};
 
 
 
-char& CharVector::operator[](const unsigned int index) {
+char& CharVector::operator[](const unsigned int &index) {
   return this->resizeable_array[index];
 }
 
-const char& CharVector::operator[](const unsigned int index) const {
+const char& CharVector::operator[](const unsigned int &index) const {
   return this->resizeable_array[index];
 }
 
@@ -141,26 +141,4 @@ void CharVector::Shrink() {
 
 void CharVector::Clear() {
   this->resizeable_array.clear();
-}
-
-const std::vector<char>& CharVector::GetVector() const {
-  return this->resizeable_array;
-}
-
-void CharVector::Reverse() {
-  std::reverse(this->begin(), this->end());
-}
-
-bool CharVector::IsEmpty() const {
-  if (this->Length() < 1) {
-    return true;
-  }
-  return false;
-}
-
-bool CharVector::IsNotEmpty() const {
-  if (this->IsEmpty()) {
-    return false;
-  }
-  return true;
 }

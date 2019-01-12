@@ -1,15 +1,17 @@
 # depslib dependency file v1.0
-1547068011 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.cpp
+1547290566 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.cpp
 	"main.h"
 
-1547053333 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
+1547283673 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
 	<iostream>
 	<vector>
 	<chrono>
 	<thread>
+	"CLI11.hpp"
 	"file_functions.h"
 	"settings_functions.h"
 	"Sequence.h"
+	"SequenceMapper.h"
 
 1543074626 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta_file.cpp
 	"main.h"
@@ -150,10 +152,11 @@
 1547057313 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\filereader.cpp
 	"FileReader.h"
 
-1547057392 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\filereader.h
+1547197004 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\filereader.h
 	<iostream>
 	<fstream>
 	"String.h"
+	<cstdlib>
 
 1546195898 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\read_fasta.cpp
 	"read_fasta.h"
@@ -172,20 +175,20 @@
 	<iostream>
 	<string>
 
-1547068238 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\charvector.cpp
+1547280943 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\charvector.cpp
 	"CharVector.h"
 
-1547068198 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\charvector.h
+1547280948 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\charvector.h
 	<iostream>
 	<vector>
 	<map>
 	<algorithm>
 	"String.h"
 
-1547067993 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\sequence.cpp
+1547290351 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\sequence.cpp
 	"Sequence.h"
 
-1547067993 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\sequence.h
+1547289883 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\sequence.h
 	<map>
 	<algorithm>
 	"String.h"
@@ -209,26 +212,26 @@
 1546201289 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\map.cpp
 	"Map.h"
 
-1547022076 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmertriple.h
+1547280350 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmertriple.h
 	<iostream>
 	"KmerKey.h"
 
-1547022474 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmerkey.cpp
+1547280275 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmerkey.cpp
 	"KmerKey.h"
 
-1547022644 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmertriple.cpp
+1547280412 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmertriple.cpp
 	"KmerTriple.h"
 
-1547022509 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmerkey.h
+1547280226 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmerkey.h
 	<iostream>
 	"Kmer.h"
 
-1546895225 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmerindex.h
+1547278818 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmerindex.h
 	<vector>
 	<map>
 	"KmerKey.h"
 
-1546982894 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmerindex.cpp
+1547278804 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmerindex.cpp
 	"KmerIndex.h"
 
 1546248589 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\kmer.cpp
@@ -263,11 +266,22 @@
 	<experimental/optional>
 	<boost/optional.hpp>
 
-1547067675 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\settings_functions.h
+1547283610 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\settings_functions.h
 	<string>
 	<vector>
 	<map>
-	"CLI11.hpp"
 
-1547067764 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\settings_functions.cpp
+1547197099 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\settings_functions.cpp
 	"settings_functions.h"
+
+1547225300 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\sequencemapper.cpp
+	"SequenceMapper.h"
+
+1547225016 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\sequencemapper.h
+	<iostream>
+	<cstdlib>
+	<cstddef>
+	<algorithm>
+	<list>
+	"Sequence.h"
+

@@ -17,13 +17,13 @@ private:
   String description;
   CharVector sequence;
 
+  std::vector<KmerTriple> minimizers;
+  KmerIndex minimizer_index;
+
   static unsigned int max_print;
   static std::map<char, char> reverse_nucleobase;
 
 public:
-  std::vector<KmerTriple> minimizers;
-  KmerIndex minimizer_index;
-
   Sequence() :
     description{},
     sequence{},
@@ -44,10 +44,16 @@ public:
 
   friend std::ostream& operator<< (std::ostream &out, const Sequence &sequence); //for printing
 
+  String& GetDescription();
   const String& GetDescription() const;
+  CharVector& GetSequence();
   const CharVector& GetSequence() const;
+  std::vector<KmerTriple>& GetMinimizers();
+  const std::vector<KmerTriple>& GetMinimizers() const;
+  KmerIndex& GetIndex();
+  const KmerIndex& GetIndex() const;
 
-  void Transform(const std::map<char,char> char_pairs);
+  void Transform(std::map<char, char> char_pairs);
   void Reverse();
 
   void ExtractMinimizers(unsigned int kmer_length, unsigned int window_length);
@@ -61,6 +67,10 @@ public:
 
   bool IsReverseAlignment(const Sequence& read);
   void CompareWithSequence(const Sequence& read);
+
+  unsigned int CountMinimizersForComplement(const Sequence& read);
+  unsigned int CountMinimizersAgainstComplement(const Sequence& read);
+
   void PrintPositionSurrounding(const unsigned int& position) const;
   void PrintFromTo(const unsigned int& from, const unsigned int& to) const;
 
@@ -70,20 +80,6 @@ public:
   void ClearMinimizers();
   void ClearIndex();
   void Clear();
-
-  const std::vector<KmerTriple>& getMinimizers();
-
-  const String& getDescription();
-  const CharVector& getSequence();
-
-
-  unsigned int Length() const;
-  void Transform(const std::map<char,char> char_pairs);
-  void Reverse();
-  bool IsReverseAlignment(const Sequence& read);
-  void CompareWithSequence(const Sequence& read);
-  void PrintPositionSurrounding(const unsigned int& position) const;
-  void PrintFromTo(const unsigned int& from, const unsigned int& to) const;
 };
 
 //Header guard end

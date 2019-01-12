@@ -27,7 +27,9 @@ public:
   friend bool operator== (const KmerKey &key_A, const KmerKey &key_B);
   friend bool operator< (const KmerKey &key_A, const KmerKey &key_B);
 
+  Kmer& GetKmer();
   const Kmer& GetKmer() const;
+  bool& GetIsReverse();
   const bool& GetIsReverse() const;
 };
 
