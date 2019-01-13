@@ -1,3 +1,7 @@
+/*
+Author: Mislav Jaksic
+*/
+
 #include "settings_functions.h"
 
 Settings ConstructSettings(unsigned int kmer_length,

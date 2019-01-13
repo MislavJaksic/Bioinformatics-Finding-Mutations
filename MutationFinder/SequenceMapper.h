@@ -1,3 +1,7 @@
+/*
+Author: Josip Kasap
+*/
+
 #ifndef SEQUENCE_MAPPER
 #define SEQUENCE_MAPPER
 

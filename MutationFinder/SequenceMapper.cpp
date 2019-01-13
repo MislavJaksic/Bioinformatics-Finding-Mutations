@@ -1,3 +1,7 @@
+/*
+Author: Josip Kasap
+*/
+
 #include "SequenceMapper.h"
 
 std::map<char, char> SequenceMapper::reverse_nucleobase = {{'0', 'C'}, {'1', 'A'}, {'2', 'T'}, {'3', 'G'}};
@@ -32,18 +36,15 @@ bool operator==(const mutation& mut1, const mutation& mut2) {
 std::vector<unsigned int> SequenceMapper::getMatchingPositions(Sequence &sequence_A, Sequence &sequence_B) {
   std::vector<unsigned int> positions{};
 
-  for (const KmerTriple& kmer_triple : sequence_B.GetMinimizers()) {
-    KmerIndex index{sequence_A.GetIndex()};
-
+  for (const KmerTriple& kmer_triple : sequence_B.minimizers) {
     int k = kmer_triple.GetKmer().Length();
     bool is_on_reverse_helix = kmer_triple.GetKey().GetIsReverse();
     unsigned int position_B = kmer_triple.GetPosition();
-    //std::map<char, char> reverse_nucleobase = {{'0', '3'}, {'1', '2'}, {'2', '1'}, {'3', '0'}};
 
     KmerKey key_true{kmer_triple.GetKey().GetKmer(), false};
     KmerKey key_reverse{kmer_triple.GetKey().GetKmer(), true};
-    std::vector<unsigned int> positions_true = index[key_true];
-    std::vector<unsigned int> positions_reverse = index[key_reverse];
+    std::vector<unsigned int> positions_true = sequence_A.minimizer_index[key_true];
+    std::vector<unsigned int> positions_reverse = sequence_A.minimizer_index[key_reverse];
     bool is_found_true = positions_true.size() >= 1;
     bool is_found_reverse = positions_reverse.size() >= 1;
 
@@ -132,18 +133,15 @@ std::vector<point> SequenceMapper::getAllMatchingPositions(Sequence &sequence_A,
   int pos_a = -1000, pos_b = -1000;
   bool reverse_helix = false;
 
-  for (const KmerTriple& kmer_triple : sequence_B.GetMinimizers()) {
-    KmerIndex index{sequence_A.GetIndex()};
-
+  for (const KmerTriple& kmer_triple : sequence_B.minimizers) {
     unsigned int k = kmer_triple.GetKey().GetKmer().Length();
     bool is_on_reverse_helix = kmer_triple.GetKey().GetIsReverse();
     unsigned int position_B = kmer_triple.GetPosition();
-    //std::map<char, char> reverse_nucleobase = {{'0', '3'}, {'1', '2'}, {'2', '1'}, {'3', '0'}};
 
     KmerKey key_true{kmer_triple.GetKey().GetKmer(), false};
     KmerKey key_reverse{kmer_triple.GetKey().GetKmer(), true};
-    std::vector<unsigned int> positions_true = index[key_true];
-    std::vector<unsigned int> positions_reverse = index[key_reverse];
+    std::vector<unsigned int> positions_true = sequence_A.minimizer_index[key_true];
+    std::vector<unsigned int> positions_reverse = sequence_A.minimizer_index[key_reverse];
     bool is_found_true = positions_true.size() >= 1;
     bool is_found_reverse = positions_reverse.size() >= 1;
 
@@ -248,9 +246,6 @@ std::list<mutation> SequenceMapper::getGlobalMutations(Sequence &sequence_A, Seq
     m.insert(std::pair<std::tuple<int, int>, cell>(m_position_1, c1));
   }
 
-  //std::cout << "m.size = " << m.size() << std::endl;
-  //std::cout << "N = " << N << ", M = " << M << std::endl;
-
   int opt;
   std::tuple<int, int> *best_parrent;
   const CharVector &x = sequence_B.GetSequence();
@@ -324,7 +319,6 @@ std::list<mutation> SequenceMapper::getGlobalMutations(Sequence &sequence_A, Seq
     }
   }
 
-  //std::cout << "m.size = " << m.size() << std::endl;
   int i = N, j = M;
   if (goal_cell_end_relaxation == false) {
     goal_cell = &m[std::make_tuple(i, j)];
@@ -334,12 +328,7 @@ std::list<mutation> SequenceMapper::getGlobalMutations(Sequence &sequence_A, Seq
   cell *current_cell = goal_cell;
   cell *parrent_cell = nullptr;
 
-  //std::cout << "sequence_A[30370] = " << SequenceMapper::reverse_nucleobase[y[30370]] << std::endl;
-
   while (i > -1 && j > -1) {
-    /*std::cout << "previous_cell(cost, parent_x, parent_y) = " << current_cell->cost << "," << current_cell->parrent_x <<
-        "," << current_cell->parrent_y << std::endl;*/
-
     parrent_cell = &m[std::make_tuple(current_cell->parrent_x, current_cell->parrent_y)];
 
     if (parrent_cell->cost == current_cell->cost) {

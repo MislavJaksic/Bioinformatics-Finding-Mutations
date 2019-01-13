@@ -1,3 +1,7 @@
+/*
+Author: Mislav Jaksic
+*/
+
 #ifndef KMER_INDEX
 #define KMER_INDEX
 
@@ -21,7 +25,7 @@ public:
 
   std::vector<unsigned int>& operator[](KmerKey &&key);
   std::vector<unsigned int>& operator[](const KmerKey &key);
-  friend std::ostream& operator<< (std::ostream &out, const KmerIndex &index); //for printing
+  friend std::ostream& operator<< (std::ostream &out, const KmerIndex &index);
 
   void Add(const KmerKey &key, const unsigned int &value);
 

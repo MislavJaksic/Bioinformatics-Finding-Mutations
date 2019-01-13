@@ -1,4 +1,7 @@
-//Header guard start
+/*
+Author: Mislav Jaksic
+*/
+
 #ifndef FILE_FUNCTIONS
 #define FILE_FUNCTIONS
 
@@ -14,5 +17,4 @@
 std::vector<Sequence> LoadSequencesFromFile(String &file_name);
 std::vector<Sequence> ReadFasta(FileReader &reader);
 
-//Header guard end
 #endif

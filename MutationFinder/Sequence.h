@@ -1,4 +1,7 @@
-//Header guard start
+/*
+Author: Mislav Jaksic
+*/
+
 #ifndef SEQUENCE
 #define SEQUENCE
 
@@ -17,13 +20,13 @@ private:
   String description;
   CharVector sequence;
 
-  std::vector<KmerTriple> minimizers;
-  KmerIndex minimizer_index;
-
   static unsigned int max_print;
   static std::map<char, char> reverse_nucleobase;
 
 public:
+  std::vector<KmerTriple> minimizers;
+  KmerIndex minimizer_index;
+
   Sequence() :
     description{},
     sequence{},
@@ -42,16 +45,12 @@ public:
     this->Clear();
   }
 
-  friend std::ostream& operator<< (std::ostream &out, const Sequence &sequence); //for printing
+  friend std::ostream& operator<< (std::ostream &out, const Sequence &sequence);
 
   String& GetDescription();
   const String& GetDescription() const;
   CharVector& GetSequence();
   const CharVector& GetSequence() const;
-  std::vector<KmerTriple>& GetMinimizers();
-  const std::vector<KmerTriple>& GetMinimizers() const;
-  KmerIndex& GetIndex();
-  const KmerIndex& GetIndex() const;
 
   void Transform(std::map<char, char> char_pairs);
   void Reverse();

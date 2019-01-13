@@ -1,3 +1,7 @@
+/*
+Author: Mislav Jaksic
+*/
+
 #ifndef KMER_KEY
 #define KMER_KEY
 
@@ -23,7 +27,7 @@ public:
     is_on_reverse_helix(init_is_reverse) {
   }
 
-  friend std::ostream& operator<< (std::ostream &out, const KmerKey &key); //for printing
+  friend std::ostream& operator<< (std::ostream &out, const KmerKey &key);
   friend bool operator== (const KmerKey &key_A, const KmerKey &key_B);
   friend bool operator< (const KmerKey &key_A, const KmerKey &key_B);
 

@@ -1,3 +1,7 @@
+/*
+Author: Mislav Jaksic
+*/
+
 #ifndef KMER_TRIPLE
 #define KMER_TRIPLE
 

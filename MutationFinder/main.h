@@ -1,4 +1,7 @@
-//Header guard start
+/*
+Author: Mislav Jaksic
+*/
+
 #ifndef MAIN
 #define MAIN
 
@@ -16,5 +19,4 @@
 #include "Sequence.h"
 #include "SequenceMapper.h"
 
-//Header guard end
 #endif

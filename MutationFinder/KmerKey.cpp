@@ -1,3 +1,7 @@
+/*
+Author: Mislav Jaksic
+*/
+
 #include "KmerKey.h"
 
 

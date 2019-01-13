@@ -1,3 +1,7 @@
+/*
+Author: Mislav Jaksic
+*/
+
 #ifndef CHAR_VECTOR_WRAPPER
 #define CHAR_VECTOR_WRAPPER
 
@@ -31,9 +35,9 @@ public:
 
   char& operator[](const unsigned int &index);
   const char& operator[](const unsigned int &index) const;
-  friend std::ostream& operator<< (std::ostream &out, const CharVector &vector); //for printing
-  friend bool operator== (const CharVector &vector_A, const CharVector &vector_B); //for map, for composite key
-  friend bool operator< (const CharVector &vector_A, const CharVector &vector_B); //for map
+  friend std::ostream& operator<< (std::ostream &out, const CharVector &vector);
+  friend bool operator== (const CharVector &vector_A, const CharVector &vector_B);
+  friend bool operator< (const CharVector &vector_A, const CharVector &vector_B);
   std::vector<char>::iterator begin();
   std::vector<char>::iterator end();
 

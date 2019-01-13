@@ -1,4 +1,7 @@
-//Header guard start
+/*
+Author: Mislav Jaksic
+*/
+
 #ifndef STRING_WRAPPER
 #define STRING_WRAPPER
 
@@ -28,10 +31,10 @@ public:
     this->Clear();
   }
 
-  char& operator[](const unsigned int index); //for string[5]
+  char& operator[](const unsigned int index);
   const char& operator[](const unsigned int index) const;
-  String& operator= (const char* s); //for "string = "hello""
-  friend std::ostream& operator<< (std::ostream &out, const String &string); //for printing
+  String& operator= (const char* s);
+  friend std::ostream& operator<< (std::ostream &out, const String &string);
 
   const std::string& GetString() const;
 
@@ -48,5 +51,4 @@ public:
   void Clear();
 };
 
-//Header guard end
 #endif

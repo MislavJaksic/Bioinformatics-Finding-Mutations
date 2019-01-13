@@ -1,3 +1,7 @@
+/*
+Author: Mislav Jaksic
+*/
+
 #include "Sequence.h"
 
 
@@ -52,22 +56,6 @@ const CharVector& Sequence::GetSequence() const {
   return this->sequence;
 }
 
-std::vector<KmerTriple>& Sequence::GetMinimizers() {
-  return this->minimizers;
-}
-
-const std::vector<KmerTriple>& Sequence::GetMinimizers() const {
-  return this->minimizers;
-}
-
-KmerIndex& Sequence::GetIndex() {
-  return this->minimizer_index;
-}
-
-const KmerIndex& Sequence::GetIndex() const {
-  return this->minimizer_index;
-}
-
 
 
 void Sequence::Transform(std::map<char, char> char_pairs) {
@@ -102,7 +90,6 @@ void Sequence::ExtractMinimizers(unsigned int kmer_length, unsigned int window_l
   }
 
   this->Shrink();
-  this->SortMinimizers();
 }
 
 void Sequence::IndexMinimizers(unsigned int kmer_length, unsigned int window_length) {

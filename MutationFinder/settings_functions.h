@@ -1,4 +1,7 @@
-//Header guard start
+/*
+Author: Mislav Jaksic
+*/
+
 #ifndef SETTINGS_FUNCTIONS
 #define SETTINGS_FUNCTIONS
 
@@ -27,5 +30,4 @@ Settings ConstructSettings(unsigned int kmer_length,
                            std::string reads_file_name);
 std::map<char, char> TransformToMap(std::vector<std::string> vector);
 
-//Header guard end
 #endif

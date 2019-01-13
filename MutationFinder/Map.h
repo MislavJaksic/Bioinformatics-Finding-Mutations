@@ -1,3 +1,7 @@
+/*
+Author: Mislav Jaksic
+*/
+
 #ifndef MAP_WRAPPER
 #define MAP_WRAPPER
 

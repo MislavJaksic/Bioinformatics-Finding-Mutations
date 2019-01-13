@@ -1,3 +1,7 @@
+/*
+Author: Mislav Jaksic
+*/
+
 #include "main.h"
 
 
@@ -41,30 +45,23 @@ int main(int argc, char **argv) {
   reference_genome.IndexMinimizers(settings.kmer_length, settings.minimizer_window_length);
   std::cout << reference_genome << std::endl;
 
-
-
-//  for (auto& read : reads) {
-//    read.Transform(settings.character_to_digit_pairs);
-//    read.ExtractMinimizers(settings.kmer_length, settings.minimizer_window_length);
-//    if (reference_genome.IsReverseAlignment(read)) {
-//      read.Reverse();
-//      read.ExtractMinimizers(settings.kmer_length, settings.minimizer_window_length);
-//    }
-//    reference_genome.CompareWithSequence(read);
-//  }
-
+  /*
+  === ===
+  Author: Josip Kasap
+  */
 
 
   int found = 0;
-  //int counter = -1;
   double mut_stat{0.0};
   SequenceMapper mapper{};
-  std::map<char, char> reverse_transformer = {{'1', 'A'}, {'2', 'T'}, {'3', 'G'}, {'0', 'C'}};
 
   std::map<unsigned int, std::vector<mutation_count>> mutation_map{};
   std::map<unsigned int, int> count_map{};
 
-  //std::cout << "Genome length = " << reference_genome.Length() << std::endl;
+  /*
+  === ===
+  Author: Mislav Jaksic
+  */
 
   for (Sequence& read : reads) {
     read.Transform(settings.character_to_digit_pairs);
@@ -73,14 +70,15 @@ int main(int argc, char **argv) {
       read.Reverse();
       read.ExtractMinimizers(settings.kmer_length, settings.minimizer_window_length);
     }
+
     /*
-    counter++;
-    if (counter != 15)
-        continue;
+    === ===
+    Author: Josip Kasap
     */
+
     std::cout << read.GetDescription() << std::endl;
     std::vector<point> points = mapper.getAllMatchingPositions(reference_genome, read);
-    //std::cout << "minimizer_number = " << read.getMinimizers().size() << std::endl;
+
     std::cout << "Shared positions = " << ((points.size() <= 1) ? 0 : points.size() - 1) << std::endl;
     if (points.size() < 2)
       continue;
@@ -89,46 +87,7 @@ int main(int argc, char **argv) {
     unsigned int end_A = points[points.size() - 1].x + read.Length() - points[points.size() - 1].y - 1;
     end_A = end_A < reference_genome.Length() ? end_A : reference_genome.Length() - 1;
 
-    /*
-    if (points.size() > 1) {
-        point k_reverse = points[0];
-        std::cout << "k = " << k_reverse.x << ", Reverse = " << k_reverse.y << std::endl;
-
-        for (int m = 1; m < (int)points.size(); m++) {
-            std::cout << "position_A = " << points[m].x << "; position_B = " << points[m].y << std::endl;
-            for (int i=-15; i<=35; i++) {
-                int pos_A = points[m].x + i;
-                if (i == 0 || i == 19) {
-                    std::cout << " ";
-                }
-                if (pos_A < 0 || pos_A >= (int)reference_genome.getSequence().Length()) {
-                    std::cout << "-";
-                } else {
-                    std::cout << reverse_transformer[reference_genome.getSequence()[pos_A]];
-                }
-            }
-            std::cout << std::endl;
-
-            for (int i=-15; i<=35; i++) {
-                int pos_B = points[m].y + i;
-                if (i == 0 || i == 19) {
-                    std::cout << " ";
-                }
-                if (pos_B < 0 || pos_B >= (int)read.getSequence().Length()) {
-                    std::cout << "-";
-                } else {
-                    std::cout << reverse_transformer[read.getSequence()[pos_B]];
-                }
-            }
-            std::cout << std::endl;
-            std::cout << std::endl;
-        }
-    }
-    */
     std::list<mutation> mutations = mapper.getMutations(reference_genome, read);
-
-    //std::cout << "start_A = " << start_A << ", end_A = " << end_A << std::endl;
-    //std::cout << "minimizer_number = " << read.getMinimizers().size() << std::endl;
 
     int size_B = read.Length();
     std::cout << "found = " << found << ", sequence_size_B = " << size_B ;
@@ -157,7 +116,6 @@ int main(int argc, char **argv) {
     }
 
     for (auto& mut : mutations) {
-      //std::cout << mut.mutation_character << "," << mut.position << "," << mut.nucleobase << std::endl;
       if (mutation_map.count(mut.position) < 1) {
         std::vector<mutation_count> mutts{};
         mutation_map.insert(std::pair<int, std::vector<mutation_count>>(mut.position, mutts));
@@ -179,7 +137,6 @@ int main(int argc, char **argv) {
     }
 
     std::cout << std::endl;
-    //return 0;
     read.ClearMinimizers();
   }
 
@@ -214,7 +171,6 @@ int main(int argc, char **argv) {
 
     if (max_mut_count->number >= count_val && max_mut_count->number >= 2) {
       mut_vector.push_back(*max_mut_count);
-      //std::cout << "position = " << max_mut_count->mut.position << ", coverage = " << count_map[max_mut_count->mut.position] << std::endl;
     }
   }
 
@@ -230,11 +186,9 @@ int main(int argc, char **argv) {
 
   myfile.close();
 
-//  for (auto& element : reference_genome.minimizer_index[key]) {
-//    std::cout << element << ",";
-//  }
-
-  //std::cout << "Sleeping... Zzzzz..." << std::endl;
-  //std::this_thread::sleep_for(std::chrono::milliseconds(10000));
   return 0;
 }
+
+/*
+=== ===
+*/
