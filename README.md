@@ -1,6 +1,19 @@
-## Finding Mutations
+## Mutation Finder
 
-A bioinformatics project.
+Finds mutations in a mutated genome using third generation sequences and a reference genome.  
+
+### Installing Bio-Linux
+
+Bio-Linux is a specialised Ubuntu workstation.  
+
+* Download [Bio-Linux](http://environmentalomics.org/bio-linux-download/)  
+* Follow the installation [instructions](http://environmentalomics.org/bio-linux-installation/)  
+* Download the Mutation Finder project  
+
+* Compile the project with: ""  
+* Adjust the settings in the settings.ini file to your liking  
+* Place the settings.ini file and input files into the same folder  
+* Run the program with: ""  
 
 ### Requirements
 
@@ -16,6 +29,8 @@ Use [C++ Google Style Guide](https://google.github.io/styleguide/cppguide.html).
 
 ### Authors
 
-[Mislav Jaksic]()  
-[Josip Kasap]()  
+[Josip Kasap](https://github.com/Kasap7)  
+[Mislav Jaksic](https://github.com/MislavJaksic)  
+
+University of Zagreb, Faculty of Electrical Engineering and Computing, [Bioinformatics](https://www.fer.unizg.hr/predmet/bio) project
 

@@ -18,6 +18,8 @@ int main(int argc, char **argv) {
   std::string reference_genome_file_name;
   std::string reads_file_name;
 
+  int mutation_quorum;
+
   app.add_option("-k, --kmer_length", kmer_length, "K-mer length");
   app.add_option("-l, --minimizer_window_length", minimizer_window_length, "K-mer minimizer window length");
 
@@ -26,6 +28,8 @@ int main(int argc, char **argv) {
 
   app.add_option("-g, --reference_genome_file_name", reference_genome_file_name, "Reference sequence FASTA file name");
   app.add_option("-r, --reads_file_name", reads_file_name, "Sequence reads FASTA file name");
+
+  app.add_option("-q, --mutation_quorum", mutation_quorum, "How many votes does it take to declare a nucleobase mutated");
 
   app.set_config("--config", "settings.ini", "Read an .ini settings file", true);
 
@@ -43,7 +47,7 @@ int main(int argc, char **argv) {
 
   reference_genome.Transform(settings.character_to_digit_pairs);
   reference_genome.IndexMinimizers(settings.kmer_length, settings.minimizer_window_length);
-  std::cout << reference_genome << std::endl;
+  std::clog << reference_genome << std::endl;
 
   /*
   === ===
@@ -76,10 +80,10 @@ int main(int argc, char **argv) {
     Author: Josip Kasap
     */
 
-    std::cout << read.GetDescription() << std::endl;
+    std::clog << read.GetDescription() << std::endl;
     std::vector<point> points = mapper.getAllMatchingPositions(reference_genome, read);
 
-    std::cout << "Shared positions = " << ((points.size() <= 1) ? 0 : points.size() - 1) << std::endl;
+    std::clog << "Shared positions = " << ((points.size() <= 1) ? 0 : points.size() - 1) << std::endl;
     if (points.size() < 2)
       continue;
 
@@ -90,17 +94,17 @@ int main(int argc, char **argv) {
     std::list<mutation> mutations = mapper.getMutations(reference_genome, read);
 
     int size_B = read.Length();
-    std::cout << "found = " << found << ", sequence_size_B = " << size_B ;
+    std::clog << "found = " << found << ", sequence_size_B = " << size_B ;
 
     int mut_found = mutations.size();
 
-    std::cout << ", mutations_found = " << mut_found << ", mutation_statistic = " <<
+    std::clog << ", mutations_found = " << mut_found << ", mutation_statistic = " <<
               ((double)mut_found) / size_B << std::endl;
 
     double mut_stat_seq = ((double)mut_found) / size_B;
 
     if (mut_stat_seq > 0.25) {
-      std::cout << "Overly big mutation, this read will be dissmissed!" << std::endl << std::endl;
+      std::clog << "Overly big mutation, this read will be dissmissed!" << std::endl << std::endl;
       continue;
     }
 
@@ -136,14 +140,14 @@ int main(int argc, char **argv) {
       }
     }
 
-    std::cout << std::endl;
+    std::clog << std::endl;
     read.ClearMinimizers();
   }
 
-  std::cout << "Found = " << found << ", out of: " << reads.size() << std::endl;
+  std::clog << "Found = " << found << ", out of: " << reads.size() << std::endl;
 
   mut_stat = mut_stat / found;
-  std::cout << "Mutation statistic average = " << mut_stat << std::endl;
+  std::clog << "Mutation statistic average = " << mut_stat << std::endl;
 
   std::vector<mutation_count> mut_vector{};
 
@@ -158,13 +162,13 @@ int main(int argc, char **argv) {
     }
 
     int count_val = count_map[max_mut_count->mut.position];
-    if (count_val <= 1)
+    if (count_val < mutation_quorum)
       continue;
     if (count_val > 5 && count_val < 10) {
       count_val = count_val / 2;
       if (count_val % 2 == 1)
         count_val += 1;
-    } else {
+    } else if (count_val >= 10){
       count_val = count_val / 2;
     }
 
@@ -178,7 +182,7 @@ int main(int argc, char **argv) {
   myfile.open("out.csv", std::ios::out | std::ios::binary);
 
   for (mutation_count& mut_count : mut_vector) {
-    std::cout << mut_count.mut.mutation_character << "," << mut_count.mut.position << "," << mut_count.mut.nucleobase <<
+    std::clog << mut_count.mut.mutation_character << "," << mut_count.mut.position << "," << mut_count.mut.nucleobase <<
               "   \t number = " << mut_count.number << std::endl;
 
     myfile << mut_count.mut.mutation_character << "," << mut_count.mut.position << "," << mut_count.mut.nucleobase << std::endl;

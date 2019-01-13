@@ -18,7 +18,6 @@ Example: 2310343 has the following 3-mers: 231, 310, 103, 034 and 343.
 | - | - | - | 1 | 0 | 3 | - | - |
 | - | - | - | - | 0 | 3 | 4 | - |
 | - | - | - | - | - | 3 | 4 | 3 |
-| - | - | - | - | - | - | - | - |
 
 By sorting seeds, similar seeds end up next to each other. This means you can easily apply the **extend algorithm** to find longer matches.  
 **Collection criterion** is the ability to recognise matches as soon as the dataset is sorted.  
@@ -64,7 +63,6 @@ l is string length calculated as l=w+k-1.
 | - | - | - | 1 | 0 | 3 | - | - |
 | - | - | - | - | 0 | 3 | 4 | - |
 | - | - | - | - | - | 3 | 4 | 3 |
-| - | - | - | - | - | - | - | - |
 
 Note: Ti has a lot of characters (this example show only a small substring; Ti may have more then a million characters), so you will need to apply the above method many times.  
 After choosing a k-mer length k and window size w, apply it to the first substring of Ti.  

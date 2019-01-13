@@ -21,10 +21,10 @@ std::vector<unsigned int>& KmerIndex::operator[](const KmerKey &key) {
 std::ostream& operator<< (std::ostream &out, const KmerIndex &kmer_index) {
   unsigned int counter = 0;
 
-  std::cout << "[";
+  std::clog << "[";
   for (auto it = kmer_index.index.cbegin(); it != kmer_index.index.cend(); ++it) {
-    std::cout << it->first;
-    std::cout << " => ";
+    std::clog << it->first;
+    std::clog << " => ";
 
     out << "[";
     for (unsigned int i = 0; i < it->second.size(); i++) {
@@ -55,7 +55,7 @@ std::ostream& operator<< (std::ostream &out, const KmerIndex &kmer_index) {
     counter++;
   }
 
-  std::cout << "]";
+  std::clog << "]";
 
   return out;
 }

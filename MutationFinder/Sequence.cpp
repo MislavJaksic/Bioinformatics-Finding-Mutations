@@ -204,7 +204,7 @@ void Sequence::CompareWithSequence(const Sequence& read) {
   unsigned int count_against_complement_votes{this->CountMinimizersAgainstComplement(read)};
   unsigned int count_for_complement_votes{this->CountMinimizersForComplement(read)};
 
-  std::cout << read.GetDescription() << std::endl;
+  std::clog << read.GetDescription() << std::endl;
   for (auto& read_minimizer : read.minimizers) {
     unsigned int read_minimizer_position{read_minimizer.GetPosition()};
     bool is_read_minimizer_on_reverse{read_minimizer.GetKey().GetIsReverse()};
@@ -221,42 +221,42 @@ void Sequence::CompareWithSequence(const Sequence& read) {
     if (true_positions.size() > 0) {
       bool is_read_reverse{is_read_minimizer_on_reverse == is_reverse_in_index};
       if (minimizer_print_count < max_minimizer_print) {
-        std::cout << "Key: " << true_key << std::endl;
-        std::cout << "Complement read? " << is_read_reverse << std::endl;
+        std::clog << "Key: " << true_key << std::endl;
+        std::clog << "Complement read? " << is_read_reverse << std::endl;
 
         for (auto& reference_position : true_positions) {
-          std::cout << "Refe: ";
+          std::clog << "Refe: ";
           this->PrintPositionSurrounding(reference_position);
-          std::cout << "Read: ";
+          std::clog << "Read: ";
           read.PrintPositionSurrounding(read_minimizer_position);
         }
-        std::cout << std::endl;
+        std::clog << std::endl;
         minimizer_print_count++;
       }
     }
     if (reverse_positions.size() > 0) {
       bool is_read_reverse{is_read_minimizer_on_reverse == is_not_reverse_in_index};
       if (minimizer_print_count < max_minimizer_print) {
-        std::cout << "Key: " << reverse_key << std::endl;
-        std::cout << "Complement read: " << is_read_reverse << std::endl;
+        std::clog << "Key: " << reverse_key << std::endl;
+        std::clog << "Complement read: " << is_read_reverse << std::endl;
 
         for (auto& reference_position : reverse_positions) {
-          std::cout << "Refe: ";
+          std::clog << "Refe: ";
           this->PrintPositionSurrounding(reference_position);
-          std::cout << "Read: ";
+          std::clog << "Read: ";
           read.PrintPositionSurrounding(read_minimizer_position);
         }
-        std::cout << std::endl;
+        std::clog << std::endl;
         minimizer_print_count++;
       }
     }
   }
 
   if (quorum > (count_against_complement_votes + count_for_complement_votes)) {
-    std::cout << "Warning! Did not meet quorum! Reverse the sequence, reduce kmer length or reduce window size." << std::endl;
+    std::clog << "Warning! Did not meet quorum! Reverse the sequence, reduce kmer length or reduce window size." << std::endl;
   }
-  std::cout << "Against complementing: " << count_against_complement_votes << std::endl;
-  std::cout << "For complementing: " << count_for_complement_votes << std::endl;
+  std::clog << "Against complementing: " << count_against_complement_votes << std::endl;
+  std::clog << "For complementing: " << count_for_complement_votes << std::endl;
 }
 
 
@@ -329,9 +329,9 @@ unsigned int Sequence::CountMinimizersAgainstComplement(const Sequence& read) {
 
 void Sequence::PrintPositionSurrounding(const unsigned int& position) const {
   this->PrintFromTo(position - this->max_print, position);
-  std::cout << this->sequence[position] << " ";
+  std::clog << this->sequence[position] << " ";
   this->PrintFromTo(position + 1, position + this->max_print);
-  std::cout << std::endl;
+  std::clog << std::endl;
 }
 
 void Sequence::PrintFromTo(const unsigned int& from, const unsigned int& to) const {
@@ -344,9 +344,9 @@ void Sequence::PrintFromTo(const unsigned int& from, const unsigned int& to) con
   }
   unsigned int count{1};
   for (unsigned int i = begin; i < end; i++) {
-    std::cout << this->sequence[i];
+    std::clog << this->sequence[i];
     if (count % 5 == 0) {
-      std::cout << " ";
+      std::clog << " ";
     }
     count++;
   }
