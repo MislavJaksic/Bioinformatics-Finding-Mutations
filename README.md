@@ -10,10 +10,10 @@ Bio-Linux is a specialised Ubuntu workstation.
 * Follow the installation [instructions](http://environmentalomics.org/bio-linux-installation/)  
 * Download the Mutation Finder project  
 
-* Compile the project with: ""  
+* Compile the project with: "" (help yourself with Code::Blocks)  
 * Adjust the settings in the settings.ini file to your liking  
 * Place the settings.ini file and input files into the same folder  
-* Run the program with: ""  
+* Run the program with: "./MutationFinder"  
 
 ### Requirements
 
