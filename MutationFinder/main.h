@@ -12,6 +12,9 @@ Author: Mislav Jaksic
 #include <chrono>
 #include <thread>
 
+#include <algorithm>
+#include <omp.h>
+
 #include "CLI11.hpp"
 
 #include "file_functions.h"

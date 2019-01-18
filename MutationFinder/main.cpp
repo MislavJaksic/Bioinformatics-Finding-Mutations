@@ -67,7 +67,9 @@ int main(int argc, char **argv) {
   Author: Mislav Jaksic
   */
 
-  for (Sequence& read : reads) {
+  #pragma omp parallel for
+  for (unsigned int i = 0; i < reads.size(); i++) {
+    Sequence read{reads[i]};
     read.Transform(settings.character_to_digit_pairs);
     read.ExtractMinimizers(settings.kmer_length, settings.minimizer_window_length);
     if (reference_genome.IsReverseAlignment(read)) {
@@ -80,10 +82,10 @@ int main(int argc, char **argv) {
     Author: Josip Kasap
     */
 
-    std::clog << read.GetDescription() << std::endl;
+    // std::clog << read.GetDescription() << std::endl;
     std::vector<point> points = mapper.getAllMatchingPositions(reference_genome, read);
 
-    std::clog << "Shared positions = " << ((points.size() <= 1) ? 0 : points.size() - 1) << std::endl;
+    // std::clog << "Shared positions = " << ((points.size() <= 1) ? 0 : points.size() - 1) << std::endl;
     if (points.size() < 2)
       continue;
 
@@ -94,17 +96,16 @@ int main(int argc, char **argv) {
     std::list<mutation> mutations = mapper.getMutations(reference_genome, read);
 
     int size_B = read.Length();
-    std::clog << "found = " << found << ", sequence_size_B = " << size_B ;
+    // std::clog << "found = " << found << ", sequence_size_B = " << size_B ;
 
     int mut_found = mutations.size();
 
-    std::clog << ", mutations_found = " << mut_found << ", mutation_statistic = " <<
-              ((double)mut_found) / size_B << std::endl;
+    // std::clog << ", mutations_found = " << mut_found << ", mutation_statistic = " << ((double)mut_found) / size_B << std::endl;
 
     double mut_stat_seq = ((double)mut_found) / size_B;
 
     if (mut_stat_seq > 0.25) {
-      std::clog << "Overly big mutation, this read will be dissmissed!" << std::endl << std::endl;
+      // std::clog << "Overly big mutation, this read will be dissmissed!" << std::endl << std::endl;
       continue;
     }
 
@@ -140,14 +141,15 @@ int main(int argc, char **argv) {
       }
     }
 
-    std::clog << std::endl;
+    // std::clog << std::endl;
     read.ClearMinimizers();
   }
 
-  std::clog << "Found = " << found << ", out of: " << reads.size() << std::endl;
+
+  // std::clog << "Found = " << found << ", out of: " << reads.size() << std::endl;
 
   mut_stat = mut_stat / found;
-  std::clog << "Mutation statistic average = " << mut_stat << std::endl;
+  // std::clog << "Mutation statistic average = " << mut_stat << std::endl;
 
   std::vector<mutation_count> mut_vector{};
 
@@ -168,7 +170,7 @@ int main(int argc, char **argv) {
       count_val = count_val / 2;
       if (count_val % 2 == 1)
         count_val += 1;
-    } else if (count_val >= 10){
+    } else if (count_val >= 10) {
       count_val = count_val / 2;
     }
 
@@ -182,7 +184,7 @@ int main(int argc, char **argv) {
   myfile.open("out.csv", std::ios::out | std::ios::binary);
 
   for (mutation_count& mut_count : mut_vector) {
-    std::clog << mut_count.mut.mutation_character << "," << mut_count.mut.position << "," << mut_count.mut.nucleobase <<
+    // std::clog << mut_count.mut.mutation_character << "," << mut_count.mut.position << "," << mut_count.mut.nucleobase <<
               "   \t number = " << mut_count.number << std::endl;
 
     myfile << mut_count.mut.mutation_character << "," << mut_count.mut.position << "," << mut_count.mut.nucleobase << std::endl;

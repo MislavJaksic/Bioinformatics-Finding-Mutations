@@ -2,11 +2,12 @@
 1547395909 source:e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.cpp
 	"main.h"
 
-1547374555 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
+1547727830 e:\greatrepository\publishing\githubrepositories\bioinformatics-finding-mutations\mutationfinder\main.h
 	<iostream>
 	<vector>
 	<chrono>
 	<thread>
+	<omp.h>
 	"CLI11.hpp"
 	"file_functions.h"
 	"settings_functions.h"
