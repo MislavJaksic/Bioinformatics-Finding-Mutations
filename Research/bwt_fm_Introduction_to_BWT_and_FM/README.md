@@ -1,15 +1,15 @@
-[Introduction to the Burrows-Wheeler Transform and FM Index](https://www.cs.jhu.edu/%7Elangmea/resources/bwt_fm.pdf)
+Research paper: [Introduction to the Burrows-Wheeler Transform and FM Index](https://www.cs.jhu.edu/%7Elangmea/resources/bwt_fm.pdf)
 
 ## 1 Burrows-Wheeler Transform (BWT)
 
-A string T exists.  
-Transform T into another string BWT(T).  
-Assume that T ends in $ (for the sake of simplicity). $ is smaller then any other character.  
-Construct a Burrows-Wheeler Matrix (BWM), then sort the rows from smallest to biggest.  
-The last column, when read from top to buttom is the new string BWT(T).  
+Imagine a string T.  
+Transform T into another string using a function BWT(T).  
+Assume that T ends in $ (for simplicity sake). $ is smaller then any other character in T.  
+Construct a **Burrows-Wheeler Matrix (BWM)**, then sort the rows in ascending order.  
+The last column, when read from top to bottom is the new string **BWT(T)**.  
 
 Example: string T is ABAABA$  
-Step 1: rotate the string until $ is at the end instead of begining.  
+Step 1: rotate the previous string until $ is at the end of the string.  
 
 | A | B | A | A | B | A | $ |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -21,7 +21,7 @@ Step 1: rotate the string until $ is at the end instead of begining.
 | B | A | A | B | A | $ | A |
 | A | B | A | A | B | A | $ |
 
-Step 2: sort the rows from smallest to biggest 
+Step 2: sort the rows in ascending order  
 
 | A | B | A | A | B | A | $ |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -33,7 +33,7 @@ Step 2: sort the rows from smallest to biggest
 | B | A | $ | A | B | A | A |
 | B | A | A | B | A | $ | A |
 
-The result of sorting is the Burrows-Wheeler Matrix (BWM).
+The result is the Burrows-Wheeler Matrix (BWM).
 The new string BWT(T) are the characters in the last column.  
 
 String T = ABAABA$  
@@ -41,7 +41,7 @@ BWT(T) = ABBA$AA
 
 ### 1.1 BWT and the suffix array
 
-A suffix array is an array of numbers that hold the starting positions of sorted suffixes.  
+A **suffix array** is an array of integers which tell the starting position of a suffix.  
 
 Example: string T is ABAABA$
 
@@ -58,7 +58,7 @@ Step 1: create all suffixes
 | - | - | - | - | - | - | $ | s6 |
 
 
-Step 2: sort the suffixes from smallest to biggest  
+Step 2: sort the suffixes in ascending order  
 
 | A | B | A | A | B | A | $ | suffixes |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:--------:|
@@ -81,8 +81,8 @@ You can define BWT(T) using a suffix array SA(T).
 BWT[i] is a character in BWT(T).  
 SA[i] is a suffix in SA(T).  
 
-If SA[i] > 0: BWT[i] = T[SA[i] - 1]  
-If SA[i] == 0: $  
+**If SA[i] > 0: BWT[i] = T[SA[i] - 1]  
+If SA[i] == 0: $**  
 
 Example: T = ABAABA$, SA(T) = [6,5,2,3,0,4,1], BWT(T) = ABBA$AA 
 
@@ -108,10 +108,10 @@ TODO
 
 ### 1.3 Reversing the Burrows-Wheeler Transform with the LF Mapping
 
-BWT is reversible, however, its not obvious how.  
-Rewrite BW Matrix so that every character is given a rank depending on occurence in string T.  
-Ranking characters in string T is called T-ranking.  
-First occurence is 0, second is 1, ...  
+BWT is reversible, however, it's not obvious how.  
+Rewrite BW Matrix so that every character is given a rank depending on occurrence in string T.  
+Ranking characters in string T is called **T-ranking**.  
+First occurrence is 0, second is 1, ...  
 
 If T = ABAABA$, then BWM(T) is:  
 
@@ -125,13 +125,13 @@ If T = ABAABA$, then BWM(T) is:
 | B1 | A3 |  $ | A0 | B0 | A1 | A2 |
 | B0 | A1 | A2 | B1 | A3 |  $ | A0 |
 
-Strangely, the rank order of each character is each column is the same.  
+Strangely, the rank order of each character in each column is the same.  
 First column rank order -> A3, A1, A2, A0 and B1, B0  
 Second column rank order -> A3, A1, A2, A0 and B1, B0  
 Last column rank order -> A3, A1, A2, A0 and B1, B0  
 
-Instead of giving every character a rank depending on occurence in string T, we'll do it for BWT(T).  
-Ranking characters in string BWT(T) is called B-ranking.  
+Instead of giving every character a rank depending on occurrence in string T, do it for BWT(T).  
+Ranking characters in string BWT(T) is called **B-ranking**.  
 
 BWT(T) = ABBA$AA  
 B-ranking is A0, B0, B1, A1, $, A2, A3.  
@@ -162,7 +162,7 @@ Step -> and so the cycle continues until $.
 
 ## 2 FM Index
 
-Because of LF mapping, BWT(T) is reversible.  
+Because of **LF mapping**, BWT(T) is reversible.  
 Using the same property, an index can be constructed.  
 
 ### 2.1 Searching
@@ -179,7 +179,7 @@ The BWM(T) if T = ABAABA$ is:
 | B | A | $ | A | B | A | A |  2   |
 | B | A | A | B | A | $ | A |  3   |
 
-We want to find occurences of substring P = ABA.  
+We want to find occurrences of substring P = ABA.  
 Because BWM(T) is sorted, all rows with P as a prefix will be consecutive.  
 
 First, we find the shortest suffix of P, A.  
@@ -217,6 +217,6 @@ We find the rows where A is before B by looking at the column L. These are rows 
 
 We are done, as there are no more P suffixes.  
 
-This process is called backwards matching.  
+This process is called **backwards matching**.  
 Apply LF matching to find a range of rows prefixed by P until we either run out of suffixes or the range become empty.  
-The number of occurences is equal to the size of range. In our case, two.  
+The number of occurrences is equal to the size of range. In our case, two.  

@@ -1,6 +1,6 @@
-[Research paper: Reducing storage requirements for biological sequence comparison](https://academic.oup.com/bioinformatics/article/20/18/3363/202143)
+Research paper: [Reducing storage requirements for biological sequence comparison](https://academic.oup.com/bioinformatics/article/20/18/3363/202143)
 
-## 1 INTRO
+## 1 Intro
 
 Task: find similar substrings in strings T1 and T2.  
 Choose a short substrings called **seed**.  
@@ -27,7 +27,7 @@ s is a k-mer string (seed),
 i is a Ti string identifier,  
 p is the position of seed s in string Ti.  
 
-## 2 MINIMIZERS
+## 2 Minimizers
 
 Choose a representative k-mer from adjacent k-mers such that strings Ti and Tj choose the same representative if they share a long enough subsequence.  
 **Minimizers** are a special set of k-mers. Minimizers are the substring representatives and therefor, the seeds.  
