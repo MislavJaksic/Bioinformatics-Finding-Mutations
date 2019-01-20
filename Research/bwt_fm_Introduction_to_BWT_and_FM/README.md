@@ -1,4 +1,4 @@
-Research paper: [Introduction to the Burrows-Wheeler Transform and FM Index](https://www.cs.jhu.edu/%7Elangmea/resources/bwt_fm.pdf)
+Source: [Introduction to the Burrows-Wheeler Transform and FM Index](https://www.cs.jhu.edu/%7Elangmea/resources/bwt_fm.pdf)
 
 ## 1 Burrows-Wheeler Transform (BWT)
 

@@ -4,13 +4,9 @@ Finds mutations in a mutated genome using third generation sequences and a refer
 
 ### Running Mutation Finder
 
-Bio-Linux is a specialised Ubuntu workstation.  
-
-* Download [Bio-Linux](http://environmentalomics.org/bio-linux-download/)  
-* Follow the installation [instructions](http://environmentalomics.org/bio-linux-installation/)  
+* (Optional) Download and install [Bio-Linux](http://environmentalomics.org/bio-linux-download/), a specialised Ubuntu workstation  
 * Download the Mutation Finder project  
-
-* Compile the project with: an IDE or a makefile (TODO)  
+* Compile the project: with an IDE or a makefile (TODO)  
 * Adjust the settings in the settings.ini file to your liking  
 * Place the settings.ini file and input files into the same folder  
 * Run the program with: "./MutationFinder"  

@@ -1,12 +1,12 @@
-Research paper: [Reducing storage requirements for biological sequence comparison](https://academic.oup.com/bioinformatics/article/20/18/3363/202143)
+Source: [Reducing storage requirements for biological sequence comparison](https://academic.oup.com/bioinformatics/article/20/18/3363/202143)
 
 ## 1 Intro
 
-Task: find similar substrings in strings T1 and T2.  
+How do you find similar substrings in strings T1 and T2?  
 Choose a short substrings called **seed**.  
-For each seed common to both T1 and T2, align T1 and T2 so that the seeds align. After aligning, check if the seed match extends beyond the seed.  
-Si are seeds representing a Ti string.  
-**k-mers** are contiguous k-letter substrings.  
+For each seed common to both T1 and T2 by aligning their seeds. After aligning, check if the seed matches extend beyond the seeds.  
+Si are seeds representing a string Ti.  
+**K-mers** are contiguous k-letter substrings.  
 
 
 Example: 2310343 has the following 3-mers: 231, 310, 103, 034 and 343.
@@ -22,7 +22,7 @@ Example: 2310343 has the following 3-mers: 231, 310, 103, 034 and 343.
 By sorting seeds, similar seeds end up next to each other. This means you can easily apply the **extend algorithm** to find longer matches.  
 **Collection criterion** is the ability to recognise matches as soon as the dataset is sorted.  
 
-**k-mer triple** is (s, i, p) where:  
+**k-mer triple** is a (s, i, p) triple where:  
 s is a k-mer string (seed),  
 i is a Ti string identifier,  
 p is the position of seed s in string Ti.  
@@ -37,12 +37,12 @@ Property 1: if two strings Ti and Tj have a significant exact match, then AT LEA
 
 ### 2.1 Interior minimizers
 
-You must choose a k-mer ordering such as numerical/lexicographic ordering.  
+Choose a k-mer ordering, numerical/lexicographic or any other ordering.  
 
 **Window size** w is the number of consecutive k-mers.  
 w k-mers cover a string of w + k - 1 characters.  
-Find a minimizer by examining w and select the smallest k-mer (based on chosen ordering).  
-In case of a tie, each of the smallest k-mers is a minimizers.  
+Find a minimizer by comparing w k-mers and select the smallest k-mer among them.  
+In case of a tie every smallest k-mer is a minimizers.  
 
 A k-mer triple (s, i, p) is a (w, k) minimizer for Ti.  
 A better formalised Property 1 is:  
@@ -51,9 +51,9 @@ Property 1': if two strings Ti and Tj have a substring of length w + k - 1 in co
 Example: (w=5, k=3, l=7)  
 w is the number of k-mers,  
 k is k-mer length,  
-l is string length calculated as l=w+k-1.  
+l, string length is as calculated l=w+k-1.  
 
-034 is the minimizer as it is the smallest k-mer when substring k-mers are sorted numerically.
+034 is the minimizer as it is the smallest k-mer after k-mers are sorted.  
 
 | Position | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -64,21 +64,21 @@ l is string length calculated as l=w+k-1.
 | - | - | - | - | 0 | 3 | 4 | - |
 | - | - | - | - | - | 3 | 4 | 3 |
 
-Note: Ti has a lot of characters (this example show only a small substring; Ti may have more then a million characters), so you will need to apply the above method many times.  
+Note: Ti has a lot of characters (this example show only a small substring; Ti may have more then a million characters), so you will need to search for minimizers many times.  
 After choosing a k-mer length k and window size w, apply it to the first substring of Ti.  
 The first substring of Ti starts at position 0.  
-From the resulting k-mers choose the smallest k-mer to become the minimizers.  
+From the resulting k-mers choose the smallest k-mer to become the minimizer.  
 Apply the same method to the second substring of Ti which starts at position 1...  
-Apply the method over and over again until you have reached the end of Ti.  
+Apply the method over and over again until you have reach the end of Ti.  
 
-A gap between minimizers can be at most w - k. If you don't want any gaps, set w <= k.  
+A gap between minimizers is at most w - k. If you don't want any gaps, set w <= k.  
 
 ### 2.2 End minimizers
 
-The gap mentioned is between minimizers, not between a minimizer and the end or beginning of the string.  
+The mentioned gap is between minimizers, not between a minimizer and the end or beginning of the string.  
 
 You can then add a (u, k) **end minimizer**.  
-An end minimizer is a minimizer chosen from a window u and anchored to the end of the string.  
+An end minimizer is a minimizer chosen from a window u which is anchored to the end of the string.  
 k-end-minimizers are all minimizers for u from i up to v.  
 
 End minimizers have the following property:  
@@ -90,7 +90,7 @@ Combine both (w, k) minimizers and (u, k) end minimizers for best results.
 
 ### 2.4 Ordering
 
-To make sure you sample as few k-mers as possible and therefor save as such storage as possible, make sure you choose a good ordering.  
+To make sure you sample as few k-mers as possible and therefor save as such memory as possible, make sure you choose a good ordering.  
 
 C and G nucleobases occure less frequently then A and T nucleobases.  
 Because we want to find rare k-mers we should assign the following numbers to each nucleobase: 0,1,2,3 are C,A,T,G respectively.  
