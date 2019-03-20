@@ -1,8 +1,12 @@
+<p align="center">
+  <img width="800" src="images/sequencing.png" alt="Sequencing DNA image"></a>
+</p>
+
 ## Mutation Finder
 
-Finds mutations in a mutated genome using third generation sequences and a reference genome.  
+Finds mutations in a mutated genome which is sequenced using third generation methods.  
 
-### Running Mutation Finder
+### Installation and running
 
 * (Optional) Download and install [Bio-Linux](http://environmentalomics.org/bio-linux-download/), a specialised Ubuntu workstation  
 * Download the Mutation Finder project  
@@ -13,16 +17,21 @@ Finds mutations in a mutated genome using third generation sequences and a refer
 
 ### Folders
 
-Docs: project documentation  
-Instructions: instructions on how to pass the academic project review  
-MutationFinder: project folder  
-Research: research notes taken during the project  
-Results: output files, CSV files with mutations for different input parameters  
-TestData: data provided by the faculty with which to test our project  
+| Folder | |
+| :---: | :--- |
+| Docs: | Project documentation |
+| Instructions: | Academic project review instructions |
+| MutationFinder: | Project folder |
+| Research: | Research notes |
+| Results: | Output files, mutation CSV files |
+| TestData: | Faculty provided test data |
 
 ### Authors
 
 [Josip Kasap](https://github.com/Kasap7)  
 [Mislav Jaksic](https://github.com/MislavJaksic)  
 
-University of Zagreb, Faculty of Electrical Engineering and Computing, [Bioinformatics](https://www.fer.unizg.hr/predmet/bio) project
+### Faculty and course
+
+University and faculty: [University of Zagreb, Faculty of Electrical Engineering and Computing](https://www.fer.unizg.hr/en)  
+Course: [Bioinformatics](https://www.fer.unizg.hr/predmet/bio)
