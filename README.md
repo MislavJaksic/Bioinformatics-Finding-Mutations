@@ -1,10 +1,10 @@
 <p align="center">
-  <img width="800" src="images/sequencing.png" alt="Sequencing DNA image"></a>
+  <img width="600" src="images/sequencing.png" alt="Sequencing DNA image"></a>
 </p>
 
 ## Mutation Finder
 
-Finds mutations in a mutated genome which is sequenced using third generation methods.  
+Assembles a genome and finds true mutations among sequencing errors.  
 
 ### Installation and running
 
@@ -20,7 +20,7 @@ Finds mutations in a mutated genome which is sequenced using third generation me
 | Folder | |
 | :---: | :--- |
 | Docs: | Project documentation |
-| Instructions: | Academic project review instructions |
+| Instructions: | Faculty provided instructions |
 | MutationFinder: | Project folder |
 | Research: | Research notes |
 | Results: | Output files, mutation CSV files |
@@ -33,5 +33,5 @@ Finds mutations in a mutated genome which is sequenced using third generation me
 
 ### Faculty and course
 
-University and faculty: [University of Zagreb, Faculty of Electrical Engineering and Computing](https://www.fer.unizg.hr/en)  
+University, faculty: [University of Zagreb, Faculty of Electrical Engineering and Computing](https://www.fer.unizg.hr/en)  
 Course: [Bioinformatics](https://www.fer.unizg.hr/predmet/bio)
