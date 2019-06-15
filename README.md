@@ -8,7 +8,7 @@ Assembles a genome and finds true mutations among sequencing errors.
 
 ### Installation and running
 
-* (Optional) Download and install [Bio-Linux](http://environmentalomics.org/bio-linux-download/), a specialised Ubuntu workstation  
+* Download and install [Bio-Linux](http://environmentalomics.org/bio-linux-download/), a specialised Ubuntu workstation (Optional)  
 * Download the Mutation Finder project  
 * Compile the project: with an IDE or a makefile (TODO)  
 * Adjust the settings in the settings.ini file to your liking  
@@ -17,7 +17,7 @@ Assembles a genome and finds true mutations among sequencing errors.
 
 ### Folders
 
-| Folder | |
+| Folder | Contents |
 | :---: | :--- |
 | Docs: | Project documentation |
 | Instructions: | Faculty provided instructions |
@@ -31,7 +31,7 @@ Assembles a genome and finds true mutations among sequencing errors.
 [Josip Kasap](https://github.com/Kasap7)  
 [Mislav Jaksic](https://github.com/MislavJaksic)  
 
-### Faculty and course
+### University, faculty and course
 
-University, faculty: [University of Zagreb, Faculty of Electrical Engineering and Computing](https://www.fer.unizg.hr/en)  
-Course: [Bioinformatics](https://www.fer.unizg.hr/predmet/bio)
+* University/Faculty: [University of Zagreb, Faculty of Electrical Engineering and Computing](https://www.fer.unizg.hr/en)  
+* Course: [Bioinformatics](https://www.fer.unizg.hr/predmet/bio)
